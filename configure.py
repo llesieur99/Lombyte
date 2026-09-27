@@ -175,6 +175,10 @@ RODATA_OVERLAYS = {
     "dispatch_game_state_update": (0x1E8960, 0xE98E0),  # retail switch table
     "fun_0020baf0": (0x1E8390, 0xE9310),  # unlock-condition switch table
     "fun_0021ddf8": (0x1E87A0, 0xE9720),  # item-handle release switch table
+    "fun_00222768": (0x1E8860, 0xE97E0),  # switch table
+    "camera_activation_check_priority": (0x1E7730, 0xE86B0),  # camera-mode switch table
+    "fun_001fe980": (0x1E7A70, 0xE89F0),  # switch table (PAL import)
+    "fun_001fdc08": (0x1E7A20, 0xE89A0),  # switch table (PAL import)
 }
 
 # Recovered C units that define the small-data variables their original
