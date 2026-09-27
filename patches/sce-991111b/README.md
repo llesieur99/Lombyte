@@ -35,7 +35,8 @@ Apply with `git apply` at the root of the extracted archive, in this order:
    lvalue-cast fix and the generated `gcc/c-gperf.h`)
 2. `0001`, `0015`, `0016`, `0019`, `0020`, `0021`, `0022`, `0025`, `0026`,
    `0027`, `0028`, `0029`, `0030`, `0031`, `0032`, `0033`, `0034`, `0037`
-3. `0036`, `0044`, `0045`, `0046`, `0047`, `0048`, `0049`
+3. `0036`, `0044`, `0045`, `0046`, `0047`, `0048`, `0049`,
+   `0050`, `0051`, `0052`, `0053`, `0054`
 
 Configure for `--target=mips64r5900-sf-elf --host=i686-linux-gnu
 --build=i686-linux-gnu --disable-nls --enable-languages=c --without-headers`
@@ -49,8 +50,59 @@ Patches marked *production dependency* are in that stack but turned no
 fixture exact on their own; they are published so the production compiler is
 reproducible from this directory. Every other entry names its exact fixture.
 
+The game code is compiled with this `cc1` and assembled by SN's `Ps2EeAs`
+(`configure.py`, rule `game-compiler`), as the retail executable was. The
+patched GNU `as` of this tree only assembles the pending `INCLUDE_ASM`
+wrappers. The `cc1` bytes depend on the host compiler as well as on the
+stack: on the Linux cloud host used for `0054`, the stack through `0053`
+builds `d372122712b3f995…`, which produces the same object as `05ff323f…` for
+every game-compiler unit, and the full stack builds `6f4bb085d51c0633…`.
+Check a rebuilt compiler by its output, not by its hash, when the host
+differs. `make` does not track header dependencies: after changing
+`mips.h`, remove `toplev.o` (or build from a fresh tree).
+
 ## Published patches
 
+- `0054-r5900-assembler-pads-loops.patch` SHA-256: `2cec82e691f4c2fbd20fe530960df5fe2476b891561bd6ad65342b31f8fa03eb`
+  - role: default. The R5900 short-loop padding and the `div` padding are
+    the assembler's: `Ps2EeAs` adds them itself. `cc1` no longer imitates
+    it: the Cygnus `mips_r5900_lengthen_loops` pass and the post-dbr
+    `mips_r5900_pad_loops` (`0019`, `0046`) are not run, and the `0025`
+    dead-slot annulment is opt-in again (it annulled slots retail leaves
+    plain). With `Ps2EeAs` and no `-g` (its line labels count as branch
+    targets for the `div` padding), 478 of 522 game-range C units build
+    byte-identically with the common configuration; full-ELF gate PASS
+  - fixtures: `textbin/audio/banks/snd_bank_load_by_loc`,
+    `textbin/fun_00226670`, `textbin/video/decoder/vi_buf_stop_dma`,
+    `gameplay/animation/find_valid_animation_frame_index`,
+    `video/decoder/video_dec_flush`
+
+- `0053-gas-la-absolute-unknown-symbol.patch` SHA-256: `c43dcd5c4f48a7b25b2660f2bace5cd9709364d179c561ef9a705f8f0ea8c93d`
+  - role: default (gas). `0020` gave loads and stores the retail rule for a
+    symbol whose size is still unknown at the use (no `.extern` seen yet):
+    in reorder mode the absolute `lui`/`<op>` pair. The `la` macro kept the
+    relaxable gp pair, which the link resolves to one gp-relative `addiu`, so
+    an 8-byte symbol that retail addresses as `lui`/`addiu` in one register
+    came out gp-relative. The same predicate now applies to `la`
+  - fixtures: `textbin/ui/menus/save_data/saving_data_menu` and
+    `textbin/fun_002135f0` byte-identical on the game compiler; full-ELF gate
+    PASS, linked ELF hash unchanged
+- `0052-r5900-dli-retail-general.patch` SHA-256: `fadf5a22a28c07fddc1e0607df186870f0a32e53597b83e0d85a2d43260e21c3`
+  - role: default (gas). Replaces the narrow rule of `0050` with the general
+    one. The original assembler builds a 64-bit `dli` constant top-down in
+    16-bit fields: the first field is aligned to the highest set bit, each
+    following field to the highest bit still missing, and the shifts between
+    them are merged. Derived from every multi-instruction 64-bit constant in
+    the game's expected listings (`0x00053535353106` ->
+    `ori 0xa6a6; dsll 16; ori 0xa6a6; dsll 11; ori 0x106`,
+    `0x000000ff000000ff` -> `ori 0xff00; dsll 24; ori 0xff`). A plain low mask
+    `2^n - 1` keeps `li -1; dsrl`, and values with an all-ones high word keep
+    the existing expansion, because the listings show them that way
+  - fixtures: `textbin/fun_001f4fb8`, `fun_001ffe18`, `fun_00200600`,
+    `fun_00200c80`, `fun_00200e08` byte-identical on the game compiler;
+    full-ELF gate PASS, linked ELF hash unchanged
+- `0051-r5900-fpr-hazard-exact.patch` SHA-256: `9ff24814d74915e50f3d0297fbf6441881538379897deed00f91525df23584db`
+- `0050-r5900-dli-retail-form.patch` SHA-256: `e671ea0cb029a7193d6a54a0ee58d65ae116edcd4674bf88baa3670eacecbe43`
 - `0049-sibcall-pass-needs-placeholder.patch` SHA-256: `6b9dae8921c7cdcc9cae3879f92990c969fd098aed7594afa7d98db8c33e714a`
   - cc1 (production stack): `05ff323f6e75accbcec5129b233d7ec16a3045805ea3c2098572985bdcf0a19f`
   - role: default. The Cygnus 2.9 sibcall pass (absent from gcc-2.95.2 and
@@ -139,8 +191,8 @@ reproducible from this directory. Every other entry names its exact fixture.
   - root cause found by runtime instrumentation (fprintf traces at every real
     `INSN_ANNULLED_BRANCH_P` assignment site in a rebuilt `cc1`), not static
     source reading - three earlier static theories about this exact mechanism
-    were each disproven first; see `docs/PROJECT_STATUS.md` in the tools repo
-    for the full trace
+    were each disproven first; the full trace is kept with the project's
+    internal development notes
   - fixture: `textbin/fun_002071c0` -> 100.0. The compiler patch alone only
     narrows this unit's residual (91.111 -> 92.778%, zero movement on every
     other unit in the corpus); reaching exact also required an independent,

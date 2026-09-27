@@ -26,12 +26,16 @@ Procedure and acceptance bar for Ratchet & Clank (PS2, `SCUS_971.99`).
 
 ## 3. Compiler model
 
-- Profiles are per owner, chosen from observed codegen (save style,
-  scheduling, addressing). Directory names and single samples are not
-  evidence.
-- Per-owner flags require a stated hypothesis and a passing gate. Freeze
-  profile and flags while refining a candidate, and record which build produced
-  an accepted result.
+- Two compilers built the retail executable: the SDK compiler for the SDK
+  library block, the game compiler for everything from `GAME_TEXT_START` on.
+  A unit's compiler follows from where retail placed it, not from which
+  compiler happens to match it; match it there. Directory names and single
+  samples are not evidence.
+- A per-owner compiler or assembler option is a last resort, and the project is
+  removing the ones it has. Add one only when the mismatch is measured, the
+  cause is not explained by the source or by a compiler bug you can fix, and the
+  entry carries that reason in `configure.py` next to the option. Prefer fixing
+  the source or the compiler over freezing a switch for a function.
 
 ## 4. The unit loop
 
@@ -127,9 +131,20 @@ justify a change in behavior.
   boundary detection or symbol inference is a starting point, never the
   authority; a wrong entry fails the full-image gate instead of silently
   changing the output.
-- Compiler routing is explicit (`SN_COMPILER_UNITS`, per-unit flags) because
-  the textbin range mixes SN and EE-GCC 2.9 code; a wrong route shows up as a
-  byte difference at the gate.
+- Compiler routing is a rule, not a list: `configure.py` builds a unit with
+  the compiler of the retail block it sits in. `ROUTE_EXCEPTIONS` names the
+  units that do not reproduce on that compiler yet and the route that still
+  builds them (SN, the patched EE-GCC, or the SDK compiler for a few game
+  functions). It only shrinks: a unit leaves it when it builds on its own
+  compiler with the common configuration, and nothing new is added.
+- Small-data variables belong to the file that defines them. Ps2EeAs reaches a
+  variable gp-relative only when it already knows its size: in a delay slot
+  (`.set nomacro`) or after its definition in the same translation unit. So a
+  unit that retail reaches gp-relative outside delay slots defines the
+  variable itself, ahead of its functions, and is listed in `SDATA_OVERLAYS`
+  so its `.sdata` lands at the retail address; functions that share such a
+  variable live in one file (`rendering/vu1_chain.c`,
+  `audio/rpc/snd_returns.c`). No `__asm__(".extern ...")` is needed.
 - The build targets the boot executable and its embedded DVP overlay blobs;
   other disc files are out of scope.
 - `verify-baseline.sh` only rebuilds a directory it owns: the staging root must
