@@ -83,11 +83,11 @@ ROUTE_EXCEPTIONS = {
     "audio/rpc/snd_post_message": "cc_sn",
     # snd_send_current_batch: send the current sound command batch over SIF RPC
     # and flip to the other buffer
-    "textbin/audio/rpc/snd_send_current_batch": "cc_sn",
+    "audio/rpc/snd_send_current_batch": "cc_sn",
     # fun_00208030: expand a 4bpp coverage map through the 16-entry weight table
     # into a 1bpp threshold mask (4 source rows per output row)
-    "textbin/fun_00208030": "cc_sn",
-    "textbin/fun_00221e50": "cc_sn",
+    "ui/menus/fun_00208030": "cc_sn",
+    "ui/menus/fun_00221e50": "cc_sn",
     # Game code still built by SN cc1 plus the SN assembler Ps2EeAs (the padless route).
     "rendering/packets/emit_rgba_draw_packet": "cc_sn_padless",
     # parse_particle_textures: The a1/a3 induction-pointer swap was the ORDER OF
@@ -95,42 +95,42 @@ ROUTE_EXCEPTIONS = {
     # sits in the for-increment clause after i = i + 1 so the loop bottom RTL
     # orders [counter][p walk], and the table stays indexed so its base
     # materialises in the preheader. 45 earlier shapes had missed it.
-    "textbin/rendering/texture/parse_particle_textures": "cc_sn_padless",
+    "rendering/texture/parse_particle_textures": "cc_sn_padless",
     # fun_00202800: load packed screen points: shift x/y, convert u/v, clear
     # flags
-    "textbin/fun_00202800": "cc_sn_padless",
+    "world/loaders/unpack_point_records": "cc_sn_padless",
     # fun_002028e0: Plain-C rewrite: the 8-byte sprite clear must be a struct
     # s64 field store (not a cast-pointer store) so reload.c coalesces the
     # post-call %hi/%lo reload into the loop-carried base copy, a separate index
     # variable for the group loop pins f->s3/i->s4, and `f->loaded = 1` before
     # the relocation stores fixes their schedule.
-    "textbin/fun_002028e0": "cc_sn_padless",
+    "world/loaders/relocate_sky_definition": "cc_sn_padless",
     # set_up_vis_gif_viewer: Registered route is padless+none (native scores
     # only 87.8): the packet high word is (u64)(u32)n << 32 taken from the 2nd
     # argument instead of w1 >> 32, and 0x20 is OR-ed with (w1 & 0x1C) in the
     # mode>=0 branch but with (prim << 6) in the two negative branches.
-    "textbin/rendering/set_up_vis_gif_viewer": "cc_sn_padless",
+    "rendering/set_up_vis_gif_viewer": "cc_sn_padless",
     "gameplay/animation/update_moby_animation_state": "cc_sn_padless",
     # patch_moby_gifs: patch moby class GIF tex words through the texture remap
     # table
-    "textbin/gameplay/entities/patch_moby_gifs": "cc_sn_padless",
+    "gameplay/entities/patch_moby_gifs": "cc_sn_padless",
     # fun_00221460: A dead `p = m->items;` statement that cc1 deletes still
     # perturbs the local hard-register order into retail's, and declaring
     # func_001F6530 void removes the unused-return pseudo so its argument copies
     # emit in retail's order a2<-s0, a3<-v0, a1<-s2. NOTE:
     # src/assembly/textbin/fun_001fd748.c still declares that callee as s32 in
     # another translation unit.
-    "textbin/fun_00221460": "cc_sn_padless",
+    "ui/menus/fun_00221460": "cc_sn_padless",
     # fun_00232d00: bind the stash RPC server, read its IOP buffer and reset the
     # stash slots
-    "textbin/fun_00232d00": "cc_sn_padless",
+    "storage/cd/fun_00232d00": "cc_sn_padless",
     # Game code still built by the patched 991111 compiler (plus the SN assembler).
     # Promoted by the decomp workbench: exact only under the patched
     # 991111 profile (fresh SN/EE-GCC 2.9 measurements are lower).
-    "textbin/fun_00226848": "cc_ee_gcc_patched",
+    "ui/menus/fun_00226848": "cc_ee_gcc_patched",
     # Promoted by the decomp workbench: exact only under the patched
     # 991111 profile (fresh SN/EE-GCC 2.9 measurements are lower).
-    "textbin/fun_0022c6f8": "cc_ee_gcc_patched",
+    "audio/sound/fun_0022c6f8": "cc_ee_gcc_patched",
     # SDK code still built by the patched 991111 compiler (plus the SN assembler).
     # Retail uses classic mult/mflo; the frozen trees emit the R5900 rd-form.
     # 100/100/100 + patha linked-byte equal (0x12D3A0), 2026-09-12.
@@ -150,7 +150,7 @@ ROUTE_EXCEPTIONS = {
 # is opt-in and absent by default; flag-absent output is byte-identical.
 EE_GCC_PATCHED_FLAG_UNITS = {
     "sdk/library/picturecodingextension": "-mastra-volatile-delay -mastra-sd-saves",
-    "textbin/fun_00226848": "-mastra-no-lo-sum-tie",
+    "ui/menus/fun_00226848": "-mastra-no-lo-sum-tie",
     "sdk/library/_lastFrame": "-mastra-sd-saves -mastra-cse-argdup -mastra-call-args-reverse",
 }
 
@@ -173,12 +173,20 @@ RODATA_OVERLAYS = {
     # the same VMA/file offset for the relocations to resolve content-equal.
     "_getpic": (0x153AA0, 0x54A20),
     "dispatch_game_state_update": (0x1E8960, 0xE98E0),  # retail switch table
-    "fun_0020baf0": (0x1E8390, 0xE9310),  # unlock-condition switch table
+    "gameplay/missions/check_mission_condition": (0x1E8390, 0xE9310),  # unlock-condition switch table
     "fun_0021ddf8": (0x1E87A0, 0xE9720),  # item-handle release switch table
     "fun_00222768": (0x1E8860, 0xE97E0),  # switch table
     "camera_activation_check_priority": (0x1E7730, 0xE86B0),  # camera-mode switch table
-    "fun_001fe980": (0x1E7A70, 0xE89F0),  # switch table (PAL import)
-    "fun_001fdc08": (0x1E7A20, 0xE89A0),  # switch table (PAL import)
+    "ui/help/draw_help": (0x1E7A70, 0xE89F0),  # switch table (PAL import)
+    "ui/help/dismiss_help": (0x1E7A20, 0xE89A0),  # switch table (PAL import)
+    # A switch's jump table is a literal pool that retail placed at a fixed VMA
+    # (jtbl_001528E0 = 0x1528E0); the expected object references it by that
+    # splat symbol, so the compiled .rodata has to land at the same VMA and
+    # file offset for the relocation to resolve content-equal. Same shape as
+    # _getpic above. This only fixes the PLACEMENT, so it unblocks objdiff
+    # pairing; it does not by itself make the unit match.
+    "_sceFs_Rcv_Intr": (0x1528E0, 0x53860),  # retail switch table (jtbl_001528E0)
+    "fun_00216c48": (0x1E86A0, 0xE9620),  # retail switch table (jtbl_001E86A0)
 }
 
 # Recovered C units that define the small-data variables their original
@@ -190,7 +198,7 @@ RODATA_OVERLAYS = {
 # small-data blobs (core.lit / .lit).  Placed like RODATA_OVERLAYS.
 SDATA_OVERLAYS = {
     "audio/rpc/snd_returns": (0x15EC80, 0x5FC00),
-    "textbin/fun_001f0bd0": (0x15F000, 0x5FF80),
+    "rendering/debug/print_debug_text": (0x15F000, 0x5FF80),
     "runtime/resources/update_resource_counter": (0x15F8F8, 0x60878),
     "rendering/vu1_chain": (0x160EE0, 0x61E60),
 }
@@ -242,14 +250,14 @@ GAME_COMPILER_FLAG_UNITS = {
     # 0046-r5900-pad-unfilled-loops (cc1 eb7a3497...).  100/100/100 and
     # full-ELF PASS on 2026-09-22.
     "audio/streaming/snd_init_vag_streaming_ex": "-mastra-r5900-extern-buffer",
-    "textbin/fun_00219fa0": "-mastra-r5900-extern-buffer",
+    "ui/menus/fun_00219fa0": "-mastra-r5900-extern-buffer",
     # fun_00221968: 100/100/100 on the game compiler only with
     # -fno-expensive-optimizations (the bank flag; without it 90.45).  Its
     # 2026-09-22 demotion measured cc_game without the flag (62.65).
-    "textbin/fun_00221968": "-fno-expensive-optimizations",
+    "ui/menus/fun_00221968": "-fno-expensive-optimizations",
     # FUN_0021b6d8 keeps its retail pseudo values in a0-a3 via fixed-register
     # constraints; the same four pins reproduce the object on the game compiler.
-    "textbin/fun_0021b6d8": "-ffixed-4 -ffixed-5 -ffixed-6 -ffixed-7",
+    "ui/menus/fun_0021b6d8": "-ffixed-4 -ffixed-5 -ffixed-6 -ffixed-7",
     "audio/streaming/snd_stream_safe_cd_break": "-mastra-r5900-extern-buffer",
     "audio/streaming/snd_stream_safe_cd_callback": "-mastra-r5900-extern-buffer",
     "audio/streaming/snd_stream_safe_cd_get_error": "-mastra-r5900-extern-buffer",
@@ -259,11 +267,11 @@ GAME_COMPILER_FLAG_UNITS = {
     # here while -mno-split-addresses is required.
     "rendering/vu1_add_g_sregister": "-mno-split-addresses",
     "audio/streaming/snd_stream_safe_cd_sync": "-mastra-r5900-extern-buffer",
-    "textbin/fun_001f21c0": "-mno-split-addresses",
+    "rendering/state/reset_graphics": "-mno-split-addresses",
     "ui/menus/draw_menu_selection_marker": "-mastra-r5900-extern-buffer",
     "audio/rpc/snd_reset_state_and_flush_commands": "-mastra-r5900-extern-buffer",
-    "textbin/fun_00225490": "-fno-schedule-insns",
-    "textbin/fun_0022c7e8": "-fno-schedule-insns",
+    "ui/menus/fun_00225490": "-fno-schedule-insns",
+    "audio/sound/fun_0022c7e8": "-fno-schedule-insns",
     # fun_001f33b8 (-fno-schedule-insns) and fun_00221f58 (-G0) carry no entry:
     # both owners are still assembly wrappers, where an option cannot change the
     # wrapper's bytes. The shorter keys also always won first-suffix-match over
@@ -424,6 +432,25 @@ def _win_path(value: str) -> str:
     if match:
         return f"{match.group(1).upper()}:/{match.group(2)}".replace("/", "\\")
     return value.replace("/", "\\")
+
+
+def _windows_exe(path: str) -> str:
+    """Spell a Windows tool (Ps2EeAs, the SN driver) for a ninja command.
+
+    A checkout on a Windows drive under WSL (/mnt/<drive>/, see _win_path)
+    runs the PE natively through WSL interop. Anywhere else the PE can only run
+    under wine, so it is launched through an explicit `wine` rather than
+    whatever binfmt_misc resolves: launched that way, Ps2EeAs exits 253
+    printing nothing on some inputs (fun_001ec530, a div.s in a branch delay
+    slot) that `wine Ps2EeAs.exe` assembles. RNC_WINE overrides the wine
+    binary; an empty RNC_WINE runs the PE directly.
+    """
+    wine = os.environ.get("RNC_WINE")
+    if wine is None:
+        on_windows_drive = re.match(r"^/mnt/[A-Za-z]/", str(ROOT)) is not None
+        wine = "" if on_windows_drive else (shutil.which("wine") or "")
+    quoted = shlex.quote(path)
+    return f"{shlex.quote(wine)} {quoted}" if wine else quoted
 
 
 def _unit_from_object(object_path: Path) -> str:
@@ -822,7 +849,7 @@ def build_stuff(
     # The generated helper rewrites GNU alias assignments to labels for
     # Ps2EeAs and trims only the section tail padding Ps2EeAs adds.
     (config_dir / "padless-asm.py").write_text(PADLESS_ASM_HELPER)
-    ee_assembler = str(Path(SN_TOOLCHAIN_ROOT) / "ee/bin/Ps2EeAs.exe")
+    ee_assembler = _windows_exe(str(Path(SN_TOOLCHAIN_ROOT) / "ee/bin/Ps2EeAs.exe"))
 
     game_root = _game_compiler_root()
     # Game code: the game compiler's cc1, assembled by Ps2EeAs, as retail was.
@@ -839,7 +866,7 @@ def build_stuff(
             f"{game_root}/ee-gcc -S -I{game_root}/include {common_includes} "
             f"{LANG_DEFINE} -DMATCHING_DECOMP -O2 $in $extra -o $gc_work/cand.s && "
             f"{sys.executable} padless-asm.py normalize $gc_work/cand.s $gc_work/cand-final.s none && "
-            f"'{ee_assembler}' -o '$gc_work_win/cand-padded.o' '$gc_work_win/cand-final.s' && "
+            f"{ee_assembler} -o '$gc_work_win/cand-padded.o' '$gc_work_win/cand-final.s' && "
             f"{game_root}/as -mabi=eabi -o $gc_work/cand-ref.o $gc_work/cand-final.s && "
             f"{sys.executable} padless-asm.py finish $gc_work/cand-padded.o $out $gc_work/cand-ref.o && "
             f"{CROSS}strip $out -N dummy-symbol-name -R .mdebug"
@@ -860,7 +887,7 @@ def build_stuff(
     if sn_compiler_configured():
         sn_root = Path(SN_TOOLCHAIN_ROOT)
         sn_repo = ROOT
-        sn_driver = str(sn_root / "bin/ee-gcc.exe")
+        sn_driver = _windows_exe(str(sn_root / "bin/ee-gcc.exe"))
         sn_lib = _win_path(str(sn_root / "lib/gcc-lib/ee/2.95.2"))
         sn_eebin = _win_path(str(sn_root / "ee/bin"))
         sn_inc = _win_path(str(sn_root / "lib/gcc-lib/ee/2.95.2/include"))
@@ -874,7 +901,7 @@ def build_stuff(
             description="cc_sn $in",
             command=(
                 f"mkdir -p $sn_work && cp $in $sn_work/cand.c && "
-                f"'{sn_driver}' -c '-B{sn_lib}\\' '-B{sn_eebin}\\' "
+                f"{sn_driver} -c '-B{sn_lib}\\' '-B{sn_eebin}\\' "
                 f"-I'{sn_inc}' -I'{sn_repo_inc}' "
                 f"-DBUILD_US_VERSION -DMATCHING_DECOMP -O2 -g2 $extra "
                 f"'$sn_work_win/cand.c' -o '$sn_work_win/cand.o' && "
@@ -891,12 +918,12 @@ def build_stuff(
             description="cc_sn_padless $in",
             command=(
                 f"mkdir -p $sn_work && cp $in $sn_work/cand.c && "
-                f"'{sn_driver}' -S '-B{sn_lib}\\' '-B{sn_eebin}\\' "
+                f"{sn_driver} -S '-B{sn_lib}\\' '-B{sn_eebin}\\' "
                 f"-I'{sn_inc}' -I'{sn_repo_inc}' "
                 f"-DBUILD_US_VERSION -DMATCHING_DECOMP -O2 -g2 $extra "
                 f"'$sn_work_win/cand.c' -o '$sn_work_win/cand.s' && "
                 f"{sys.executable} padless-asm.py normalize $sn_work/cand.s $sn_work/cand-final.s $policy && "
-                f"'{ee_assembler}' -o '$sn_work_win/cand-padded.o' '$sn_work_win/cand-final.s' && "
+                f"{ee_assembler} -o '$sn_work_win/cand-padded.o' '$sn_work_win/cand-final.s' && "
                 f"{sys.executable} padless-asm.py finish $sn_work/cand-padded.o $out && "
                 f"{CROSS}strip $out -N dummy-symbol-name -R .mdebug"
             ),
@@ -918,7 +945,7 @@ def build_stuff(
                     f"-DBUILD_US_VERSION -DMATCHING_DECOMP -O2 -g2 $extra "
                     f"$pat_work/cand.c -o $pat_work/cand.s && "
                     f"{sys.executable} padless-asm.py normalize $pat_work/cand.s $pat_work/cand-final.s $policy && "
-                    f"'{ee_assembler}' -o '$pat_work_win/cand-padded.o' '$pat_work_win/cand-final.s' && "
+                    f"{ee_assembler} -o '$pat_work_win/cand-padded.o' '$pat_work_win/cand-final.s' && "
                     f"{sys.executable} padless-asm.py finish $pat_work/cand-padded.o $out && "
                     f"{CROSS}strip $out -N dummy-symbol-name -R .mdebug"
                 ),

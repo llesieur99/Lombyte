@@ -2,18 +2,30 @@
 
 Two numbers describe the same reconstruction from different angles, and both are
 byte-weighted over the **configured code in the boot executable** — not the whole
-disc. The disc's embedded DVP overlay blobs are rebuilt as raw data; overlays
-and executables elsewhere on the disc are out of scope.
+disc. The disc's embedded DVP overlay blobs are rebuilt as raw data; level code
+overlays and executables elsewhere on the disc are out of scope (see
+[Level overlays](#level-overlays)).
 
 | Metric      | Meaning                                                                   |
 | :---------- | :------------------------------------------------------------------------ |
-| **C_EXACT** | the unit's functions compile to the same bytes as retail                  |
+| **C_EXACT** | the unit's functions compile from C to the same bytes as retail           |
 | **C_FUZZY** | a pending unit's C body is measurably similar to retail, without matching |
 
 This document deliberately carries **no percentages**: they are regenerated from
 the build and would be stale the moment they were written down. Read the current
 figures from `assets/decomp_map.svg`, from `progress/report.json`, or from
 [decomp.dev](https://decomp.dev/mateuszklysz/Lombyte) — never from prose.
+
+## Exact bytes are not enough: the source must be C
+
+A promoted unit counts toward C_EXACT only when its source is C. Inline asm is
+allowed solely as a label that binds a declaration to its linked name
+(`void f(void) __asm__("FUN_00202d10");`), plus the one approved idiom in
+`include/qcopy.h`. A unit whose file holds any other asm - instructions, an
+empty memory barrier, `__asm__("" : "+r"(x))`, a `.extern` directive, or a
+register pin (`register int x asm("v1")`) - builds byte-exact but stays
+**pending** (C_FUZZY 99.99) until the asm is gone. `non_label_asm()` in
+`scripts/rnc_units.py` (mirrored in `scripts/generate_treemap.py`) is the rule.
 
 ## 100 % is not the same as exact
 
@@ -98,3 +110,13 @@ reproducible publicly unless it is routed to a profile that has the flag hook.
 
 The per-unit workflow, from picking a target to opening a pull request, is in
 [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+## Level overlays
+
+Every level's data starts with its own build of the game program: code records
+that replace the executable's whole `main` segment (text, data, vtables, bss)
+when the level loads. The executable's game code is a subset of each level's
+program; the rest is per-level code (enemies, bosses, level logic, the `update/*`
+and `hero*` modules). All distinct game code across the levels is several times
+the executable's game code.
+

@@ -12,7 +12,8 @@ What the report counts (the same contract as ``assets/decomp_map.json``):
 * every recoverable configured C unit (``config/us/rnc1.us.yaml`` rows
   ``[0xADDR, c, owner]``) with its byte size, nested under a logical group;
 * a function is matched only when it is C_EXACT: a promoted source outside
-  ``src/assembly/`` or a legacy exact unit in ``config/us/unit_categories.json``.
+  ``src/assembly/`` with no inline asm but name labels (``non_label_asm``), or
+  a legacy exact unit in ``config/us/unit_categories.json``.
   Assembly-backed units build from their retail oracle, so the ordinary
   objdiff report of the baseline shows them as 100 %; this report does not;
 * intentional low-level asm units are left out, as in the C_EXACT metric;
@@ -60,7 +61,10 @@ from progress_groups import (  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 REPORT = REPO / "progress" / "report.json"
-CATEGORIES = (("game", "Game"), ("sdk", "Sony SDK"))
+# "overlays" is the per-level game code loaded from each level's data
+# (out of scope for now, see docs/progress-metrics.md). It has no units, so
+# it reports 0 and does not move the totals.
+CATEGORIES = (("game", "Game"), ("sdk", "Sony SDK"), ("overlays", "Level overlays (out of scope)"))
 
 
 def unit_name(owner: str) -> str:
