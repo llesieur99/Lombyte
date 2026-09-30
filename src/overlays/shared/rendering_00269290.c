@@ -1075,7 +1075,97 @@ void FUN_L00_0026e150(M_26e150 *m) {
     m->b8 = (int)(q->phase * 255.0f);
     FUN_001f9a10_26e150(m->pos, m->pos, q->dv);
 }
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0026e3a8.s", FUN_L00_0026e3a8);
+typedef struct {
+    u8 pad0[0x20];
+    s8 b20;
+} T_26e3a8;
+typedef struct {
+    T_26e3a8 *m;
+    f32 f4;
+    f32 f8;
+    s16 hC;
+    s16 hE;
+    f32 f10;
+    f32 f14;
+} E_26e3a8;
+typedef struct {
+    u8 b0, b1, b2, b3;
+    u32 w4;
+    u8 b8, b9;
+    s16 hA;
+    f32 fC;
+    f32 pos[4] __attribute__((aligned(16)));
+    E_26e3a8 e;
+} P_26e3a8;
+extern u8 *tab_26e3a8 __asm__("D_L00_001B20F4") __attribute__((section(".data")));
+extern f32 org_26e3a8[4] __asm__("D_L00_00166DC0") __attribute__((section(".data")));
+extern s32 tick_26e3a8(void *) __asm__("FUN_001f9770");
+extern void kill_26e3a8(void *) __asm__("FUN_L00_00267a08");
+extern s32 trunc_26e3a8(f32) __asm__("FUN_001fa6d0");
+extern void pos_26e3a8(void *, s32, void *) __asm__("FUN_L00_0024f7c8");
+extern void vsub_26e3a8(void *, void *, void *) __asm__("FUN_001f9a28");
+extern void vscl_26e3a8(void *, void *, f32) __asm__("FUN_L00_001ff500");
+extern void vadd_26e3a8(void *, void *, void *) __asm__("FUN_001f9a10");
+void FUN_L00_0026e3a8(P_26e3a8 *p) {
+    E_26e3a8 *e;
+    f32 lim;
+    f32 a[4] __attribute__((aligned(16)));
+    f32 v[4] __attribute__((aligned(16)));
+    if (p == 0) {
+        return;
+    }
+    e = &p->e;
+    if (tick_26e3a8(&p->hA) || e->m == 0 || e->m->b20 < 0) {
+        goto kill;
+    }
+    e->hC = (e->hC + 1) & 0xF;
+    if (p->fC < 159600.0f) {
+        p->fC += D_0015ED60 * 3989.99976f;
+        if (159600.0f < p->fC) {
+            p->fC = 159600.0f;
+        }
+    } else if (159600.0f < p->fC) {
+        p->fC -= D_0015ED60 * 15959.999f;
+        if (p->fC < 159600.0f) {
+            p->fC = 159600.0f;
+        }
+    }
+    e->f8 += D_0015ED60 * 0.001f;
+    p->b8 = trunc_26e3a8(e->f8 * 255.0f);
+    p->b2 = tab_26e3a8[e->hC];
+    if (p->fC <= 159600.0f || 0.0f < e->f10) {
+        f32 *q = &e->f4;
+        *q += q[3];
+    }
+    {
+        f32 x;
+        if (p->fC <= 159600.0f) {
+            x = e->f4;
+            lim = 0.3f;
+        } else {
+            x = e->f4;
+            lim = 0.15f;
+        }
+        if (!(lim < x)) {
+            if (x < 0.0f) {
+            kill:
+                kill_26e3a8(p);
+                return;
+            }
+        } else {
+            e->f10 = -e->f10;
+            e->f4 = x + e->f10;
+        }
+    }
+    p->w4 = (p->w4 & 0xFFFFFF) + (trunc_26e3a8(e->f4 * 256.0f) << 24);
+    e->f14 += (1.0f - e->f14) * (D_0015ED60 * 0.175f);
+    if (e->hE != -1) {
+        pos_26e3a8(e->m, e->hE, a);
+        vsub_26e3a8(v, org_26e3a8, a);
+        vscl_26e3a8(v, v, e->f14);
+        vadd_26e3a8(p->pos, a, v);
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0026e670.s", FUN_L00_0026e670);
 typedef int V_26eb88 __attribute__((mode(TI)));
 extern float D_0015ED60_26eb88 __asm__("D_0015ED60");
