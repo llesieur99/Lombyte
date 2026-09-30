@@ -2,8 +2,59 @@
 #include "types.h"
 #include "asm.h"
 
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0023b120.s", FUN_L00_0023b120);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0023b6c0.s", FUN_L00_0023b6c0);
+typedef struct { u8 p[6]; u8 lw; u8 lh; } R0023b120;
+typedef struct { s16 a; s16 k; } T0023b120;
+typedef struct { u8 p[0x20]; T0023b120 *tab; R0023b120 *rec; } G0023b120;
+typedef struct { u8 p[0x48]; s16 x; s16 y; } O0023b120;
+extern G0023b120 D_L00_0017E4D8;
+void FUN_001ffc30(s32, s32, s32, s32, s32, s32);
+void FUN_L00_0023b120(O0023b120 *o, s32 id, s32 x, s32 y, u32 flags, s32 extra) {
+    s32 w0, h0, w, h;
+    R0023b120 *r;
+    if (id < 0) return;
+    x += o->x;
+    y += o->y;
+    r = &D_L00_0017E4D8.rec[D_L00_0017E4D8.tab[id].k];
+    w0 = 1 << r->lw;
+    h0 = 1 << r->lh;
+    w = w0;
+    h = h0;
+    if (flags & 1) { x -= w >> 1; y -= h >> 1; }
+    if (flags & 2) { x += w >> 2; y += h >> 2; w >>= 1; h >>= 1; }
+    if (flags & 4) { x -= w0 >> 1; y -= h0 >> 1; w <<= 1; h <<= 1; }
+    FUN_001ffc30(id, x, y, w, h, extra);
+}
+extern char *D_L00_001611C0_23b6c0 __asm__("D_L00_001611C0");
+extern int D_0013E500_23b6c0[] __asm__("D_0013E500");
+extern int D_L00_0017E4D8_23b6c0[] __asm__("D_L00_0017E4D8") __attribute__((section(".data")));
+extern u64 FUN_001ffa10_23b6c0(int) __asm__("FUN_001ffa10");
+
+void FUN_L00_0023b6c0(int tex, int x, int y, int w, int h, int a) {
+    u64 *p;
+    int *s;
+    int *g;
+    *(int *)(D_L00_001611C0_23b6c0 + 0) = 0x10000005;
+    *(int *)(D_L00_001611C0_23b6c0 + 4) = 0;
+    *(int *)(D_L00_001611C0_23b6c0 + 8) = 0;
+    *(int *)(D_L00_001611C0_23b6c0 + 12) = 0x50000005;
+    D_L00_001611C0_23b6c0 += 0x10;
+    p = (u64 *)D_L00_001611C0_23b6c0;
+    p[0] = 0x7400000000008001ULL;
+    p[1] = 0x5353106;
+    p[2] = FUN_001ffa10_23b6c0(tex);
+    p[3] = 0x156;
+    p[4] = ((u64)a << 24) | 0x7F7F7F;
+    p[5] = 0;
+    s = D_0013E500_23b6c0;
+    g = D_L00_0017E4D8_23b6c0;
+    p[6] = (u64)(((x << 4) + s[4] - 8) | (((u64)((y << 4) + s[5] - 8)) << 16)) | ((u64)g[3] << 32);
+    p[7] = (h << 20) + (w << 4);
+    x += w;
+    y += h;
+    p[8] = (u64)(((x << 4) + s[4] - 8) | (((u64)((y << 4) + s[5] - 8)) << 16)) | ((u64)g[3] << 32);
+    p[9] = 0;
+    *(char * volatile *)&D_L00_001611C0_23b6c0 += 0x50;
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0023bac0.s", FUN_L00_0023bac0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0023cdb0.s", FUN_L00_0023cdb0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0023cdb8.s", FUN_L00_0023cdb8);
