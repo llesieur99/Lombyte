@@ -14,6 +14,8 @@
 </p>
 <br>
 
+---
+
 <p align="center">
   <a href="https://decomp.dev/mateuszklysz/Lombyte">
     <img src="assets/decomp_map.svg" alt="Lombyte decompilation progress" width="100%">
