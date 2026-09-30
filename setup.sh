@@ -103,6 +103,20 @@ assert_sha() { sha_ok "$1" "$2" || die "$1 does not match its pinned SHA-256 ($2
 as_root() { if [[ "$(id -u)" == 0 ]]; then "$@"; else sudo "$@"; fi; }
 is_wsl() { grep -qi microsoft /proc/version 2>/dev/null; }
 
+# Replace an install directory under tools/ with a freshly staged one. An
+# existing directory is kept as <name>.previous rather than deleted, so a
+# hand-installed toolchain can be recovered.
+replace_dir() { # target staged
+    local target=$1 staged=$2
+    case "$target" in "$TOOLS"/*) ;; *) die "internal: refusing to replace $target outside tools/" ;; esac
+    if [[ -e "$target" ]]; then
+        rm -rf -- "$target.previous"
+        mv -- "$target" "$target.previous"
+        warn "kept the previous $(basename -- "$target") as $(basename -- "$target").previous"
+    fi
+    mv -- "$staged" "$target"
+}
+
 download() { # url sha path
     local url=$1 sha=$2 path=$3
     mkdir -p "$(dirname -- "$path")"
@@ -140,14 +154,16 @@ WORKDIR /work
 EOF
 }
 
+DOCKER_MOUNTS=()
 docker_run() { # args...
     local tty=()
     [[ -t 0 && -t 1 ]] && tty=(-it)
     # The build writes into the checkout (tools/, build/, .venv), so the
-    # container works on the bind-mounted checkout as the calling user's id
-    # when that is possible; a named volume keeps Wine's prefix between runs.
-    docker run --rm "${tty[@]}" --platform linux/amd64 \
+    # container works on the bind-mounted checkout; a named volume keeps
+    # Wine's prefix between runs. Nothing else on the host is mounted.
+    docker run --rm ${tty[@]+"${tty[@]}"} --platform linux/amd64 \
         --volume "$ROOT:/work" --volume "$DOCKER_IMAGE-home:/root" \
+        ${DOCKER_MOUNTS[@]+"${DOCKER_MOUNTS[@]}"} \
         --workdir /work --env LOMBYTE_IN_CONTAINER=1 \
         "$DOCKER_IMAGE" "$@"
 }
@@ -156,8 +172,17 @@ if [[ "$MODE" == docker ]]; then
     docker_build_image
     args=(--no-build)
     [[ "$BUILD" == 1 ]] && args=()
-    [[ -n "$ISO" ]] && { [[ -f "$ISO" ]] || die "no such file: $ISO"; mkdir -p dumps; cp -n -- "$ISO" dumps/ 2>/dev/null || true; args+=(--iso "dumps/$(basename -- "$ISO")"); }
-    [[ -n "$ELF" ]] && { [[ -f "$ELF" ]] || die "no such file: $ELF"; mkdir -p config/us; cp -- "$ELF" "$ELF_TARGET"; }
+    # The disc image and executable are mounted read-only, never copied.
+    if [[ -n "$ISO" ]]; then
+        [[ -f "$ISO" ]] || die "no such file: $ISO"
+        DOCKER_MOUNTS+=(--volume "$(cd -- "$(dirname -- "$ISO")" && pwd -P)/$(basename -- "$ISO"):/input/game.iso:ro")
+        args+=(--iso /input/game.iso)
+    fi
+    if [[ -n "$ELF" ]]; then
+        [[ -f "$ELF" ]] || die "no such file: $ELF"
+        DOCKER_MOUNTS+=(--volume "$(cd -- "$(dirname -- "$ELF")" && pwd -P)/$(basename -- "$ELF"):/input/SCUS_971.99:ro")
+        args+=(--elf /input/SCUS_971.99)
+    fi
     [[ "$WITH_PATCHED" == 1 ]] && args+=(--with-patched)
     docker_run bash setup.sh "${args[@]}"
     say "done. Open a shell with the toolchain: ./setup.sh --shell  (then: make elf, python3 scripts/check-unit.py ...)"
@@ -261,8 +286,8 @@ install_binutils() {
     rm -rf -- "$STAGE/binutils"; mkdir -p "$STAGE/binutils"
     tar -xzf "$archive" -C "$STAGE/binutils"
     chmod 0755 "$STAGE/binutils"/mips-ps2-decompals-*
-    rm -rf -- "$target"; mkdir -p "$TOOLS"
-    mv "$STAGE/binutils" "$target"
+    mkdir -p "$TOOLS"
+    replace_dir "$target" "$STAGE/binutils"
 }
 
 install_objdiff() {
@@ -283,8 +308,7 @@ install_sdk_compiler() {
     tar -xJf "$archive" -C "$STAGE/sdk"
     assert_sha "$STAGE/sdk/bin/ee-gcc" 64d0a50fef499da0b98177eb5e79e41dfb066ad44246b137c78a266ef97ee265
     assert_sha "$STAGE/sdk/lib/gcc-lib/ee/2.9-ee-991111-01/cc1" b9aef69f93efb949f15ea58189e8eef4a002b9fe4de5d3fcf89c34e1244ec026
-    rm -rf -- "$target"
-    mv "$STAGE/sdk" "$target"
+    replace_dir "$target" "$STAGE/sdk"
 }
 
 install_sn_compiler() {
@@ -317,8 +341,7 @@ install_sn_compiler() {
     mkdir -p "$(dirname -- "$STAGE/sn/lib/gcc-lib/ee/2.95.2/include")"
     rm -rf -- "$STAGE/sn/lib/gcc-lib/ee/2.95.2/include"
     cp -r "$mirror/$SDK_MIRROR_INCLUDE" "$STAGE/sn/lib/gcc-lib/ee/2.95.2/include"
-    rm -rf -- "$target"
-    mv "$STAGE/sn" "$target"
+    replace_dir "$target" "$STAGE/sn"
 }
 
 game_compiler_current() {

@@ -7,6 +7,17 @@ with `scripts/build-game-compiler.py`, creates `.venv`, takes the boot
 executable from your disc image, and runs the gate. The rest of this page is
 the manual route and the reference for what the script installs.
 
+The script ships nothing proprietary: it downloads the toolchain from the
+public mirrors the PS2 decompilation community uses and checks every file
+against a pinned SHA-256 before installing it, builds the game compiler from
+its GPL source and this repository's
+[patch stack](../patches/sce-991111b/README.md), and only ever reads the game
+from the disc image or executable you provide. It writes inside the checkout
+only (`tools/`, `build/`, `.venv`, `config/us/SCUS_971.99`); the one system
+change it makes is installing the listed Debian/Ubuntu packages with `sudo`
+(on plain Linux that includes Wine and the i386 architecture for it). Nothing
+is added to your shell profile or `PATH`.
+
 The verified environment is **Linux/WSL**. Compiler versions matter for
 matching: preserve the directory layouts and the executable permissions, and
 expect the toolchain binaries to be installed by you — nothing here is

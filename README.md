@@ -65,9 +65,7 @@ It ends with `PASS: reconstructed boot ELF matches retail`; from there, [CONTRIB
 | WSL                               | same as Linux                                                                                                                                                           |
 | macOS, other Linux distributions  | with [Docker](https://docs.docker.com/get-docker/): `./setup.sh --docker --iso ...`, then `./setup.sh --shell` for a shell with the toolchain (`make elf`, `check-unit`) |
 
-Already have the executable? `./setup.sh --elf /path/to/SCUS_971.99`. `./setup.sh --check` lists what is installed, `./setup.sh --help` the rest.
-
-The script ships nothing proprietary: it downloads the toolchain from the public mirrors the PS2 decompilation community uses and checks every file against a pinned SHA-256, builds the game compiler from its GPL source and this repository's [patch stack](patches/sce-991111b/README.md), and only ever reads the game from the disc image or executable you provide. The details, and the manual route, are in [docs/building.md](docs/building.md).
+Already have the executable? `./setup.sh --elf /path/to/SCUS_971.99`. `./setup.sh --check` lists what is installed, `./setup.sh --help` the rest; what the script installs, and the manual route, are in [docs/building.md](docs/building.md).
 
 Work-in-progress C is also welcome when it preserves the matching baseline. Do not submit game images, extracted game data, or proprietary compiler binaries.
 
