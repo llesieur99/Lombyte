@@ -9,13 +9,13 @@
 </p>
 <p align="center">
     A work-in-progress, byte-matching decompilation of Ratchet &amp; Clank (2002) for PlayStation 2.<br>
-    Reconstructing the original executable in readable C, with a native Rust port as the long-term goal.
+    Reconstructing the original game code in readable C, with a native Rust port as the long-term goal.
 </p>
 
 > [!NOTE]
-> Yes, this project is obviously AI-driven— that’s pretty apparent... <br>
-> AI is what makes it possible for me to work on this project at all, while I still make the calls<br>
-on the data structure, tooling, and overall direction, with all PRs reviewed manually.
+> Yes, this project is AI-driven— that’s pretty obvious... <br>
+> While AI does the heavy lifting, I maintain full control over architecture, tooling choices, <br>
+> and overall direction, with every single PR manually reviewed and verified before merging.
 
 > [!WARNING]
 > Lombyte does not include game data, executables, disc images, or proprietary toolchains.<br>
@@ -51,11 +51,10 @@ Work-in-progress C is also welcome when it preserves the matching baseline. Do n
 
 <h3>Credits</h3>
 
-- [Himuro](https://github.com/Mikompilation/Himuro) — PS2 decompilation research and reference EE-GCC toolchain work used by Lombyte's matching compiler profiles.
-- [bordplate/RC1](https://codeberg.org/bordplate/RC1) — an earlier matching-decompilation skeleton for the same game; recovered symbol names and structure were used as reference with attribution.
-- [Lynder063/rac1-decomp](https://github.com/Lynder063/rac1-decomp) — the PAL decompilation of the same game; some functions here are their C, ported to this build (marked `Ported from rac1-decomp` in the source).
-- [splat](https://github.com/ethteck/splat) and [spimdisasm](https://github.com/Decompollaborate/spimdisasm) — executable splitting and disassembly.
 - [objdiff](https://github.com/encounter/objdiff) — object-level comparison.
+- [splat](https://github.com/ethteck/splat) and [spimdisasm](https://github.com/Decompollaborate/spimdisasm) — executable splitting and disassembly.
+- [Himuro](https://github.com/Mikompilation/Himuro) — PS2 decompilation research and reference EE-GCC toolchain work used by Lombyte's matching compiler profiles.
+- [bordplate/RC1](https://codeberg.org/bordplate/RC1) & [Lynder063/rac1-decomp](https://github.com/Lynder063/rac1-decomp) — used as a reference for symbols, structs, and function logic (credited inline in the source).
 - The PS2 reverse-engineering and decompilation communities for the tools and research that make matching projects possible.
 
 <h3>License</h3>
