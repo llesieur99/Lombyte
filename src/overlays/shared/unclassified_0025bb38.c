@@ -52,8 +52,66 @@ float FUN_L00_0025bc98(float *p, float *q, int n, float x, float a, float b, flo
     }
     return d;
 }
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0025be00.s", FUN_L00_0025be00);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0025bfe0.s", FUN_L00_0025bfe0);
+extern float FUN_001fa5c8_25be00(float, float) __asm__("FUN_001fa5c8");
+extern float FUN_001fa580_25be00(float, float) __asm__("FUN_001fa580");
+extern float FUN_001f99c0_25be00(float) __asm__("FUN_001f99c0");
+extern float FUN_001f9988_25be00(float) __asm__("FUN_001f9988");
+extern float FUN_00213ed8_25be00(float, float, float *) __asm__("FUN_00213ed8");
+extern void FUN_L00_0025bc00_25be00(float *, void *, float, float) __asm__("FUN_L00_0025bc00");
+
+float FUN_L00_0025be00(float *cur, float *vel, float target, float lim, float accel, float maxv) {
+    float d;
+    float v;
+    float stop;
+    float t;
+
+    d = FUN_001fa5c8_25be00(target, *cur);
+    v = *vel;
+    if (v * d >= 0.0f && d != 0.0f) {
+        stop = v * v / accel * 0.5f;
+        if (FUN_001f99c0_25be00(d) < stop) {
+            maxv = FUN_001f99c0_25be00(d);
+            maxv += FUN_001f99c0_25be00(*vel);
+            if (stop < maxv) {
+                FUN_00213ed8_25be00(0.0f, accel, vel);
+            } else {
+                FUN_00213ed8_25be00(0.0f, accel * 1.1f, vel);
+            }
+        } else {
+            t = FUN_001f9988_25be00((accel + accel) * d);
+            if (maxv < t) {
+                t = maxv;
+            }
+            if (d < 0.0f) {
+                FUN_L00_0025bc00_25be00(vel, 0, -t, lim);
+            } else {
+                FUN_L00_0025bc00_25be00(vel, 0, t, lim);
+            }
+        }
+        maxv = FUN_001f99c0_25be00(d);
+        if (!(FUN_001f99c0_25be00(*vel) < maxv)) {
+            *cur = target;
+            return d;
+        }
+    } else {
+        FUN_L00_0025bc00_25be00(vel, 0, 0.0f, accel);
+    }
+    *cur = FUN_001fa580_25be00(*vel, *cur);
+    return *vel;
+}
+extern int truncate_float_to_s32(float) __asm__("FUN_001fa6d0");
+
+/* Ported from rac1-decomp (PAL, src/overlays/shared/mobyutil_00258BC8.c: func_L00_0025D038), where it is exact; names translated to the US level program. */
+
+unsigned int FUN_L00_0025bfe0(float r, float g, float b, float a) {
+    unsigned int x = truncate_float_to_s32(r * 255.0f) & 0xFF;
+    unsigned int y = truncate_float_to_s32(g * 255.0f) & 0xFF;
+    unsigned int z = truncate_float_to_s32(b * 255.0f) & 0xFF;
+    unsigned int w = truncate_float_to_s32(a * 255.0f);
+    {unsigned int q_ = x | (y << 8);
+    q_ |= (z << 16);
+    return q_ | (w << 24);}
+}
 #define NOT_SDA
 
 #define MACRO_ADDR

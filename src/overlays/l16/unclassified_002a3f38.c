@@ -44,7 +44,24 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf760.s", FUN_L16_002cf760);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf798.s", FUN_L16_002cf798);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf7a8.s", FUN_L16_002cf7a8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf850.s", FUN_L16_002cf850);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf9d0.s", FUN_L16_002cf9d0);
+#include "qcopy.h"
+
+/* Copy the selected 16-byte vendor vector. */
+/* Ported from rac1-decomp (PAL, src/overlays/l16_kalebo3/vendor_002A50F0.c: func_L16_002D0D98), where it is exact; names translated to the US level program. */
+
+typedef struct {
+    char pad0[0x2C0];
+    char *vectors;
+} Level16VendorVectorData;
+
+typedef struct {
+    char pad0[0x78];
+    Level16VendorVectorData *data;
+} Level16VendorVectorMoby;
+
+void FUN_L16_002cf9d0(Level16VendorVectorMoby *moby, int index, void *out) {
+    qcopy(out, moby->data->vectors + index * 16 + 16);
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cf9f8.s", FUN_L16_002cf9f8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002cff48.s", FUN_L16_002cff48);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002d0058.s", FUN_L16_002d0058);
@@ -59,5 +76,16 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002d5ef8.s", FUN_L16_002d5ef8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002d6260.s", FUN_L16_002d6260);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002d6740.s", FUN_L16_002d6740);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002de3b8.s", FUN_L16_002de3b8);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002e0de0.s", FUN_L16_002e0de0);
+/* Ported from rac1-decomp (PAL, src/overlays/l16_kalebo3/vendor_002A50F0.c: func_L16_002E2248), where it is exact; names translated to the US level program. */
+
+extern void FUN_0022da68(int, int, void *);
+
+void FUN_L16_002e0de0(unsigned char *moby) {
+    int state = 1;
+    if (moby[0x20] == state) {
+        FUN_0022da68(0, 0, moby);
+        state = 7;
+        moby[0x20] = state;
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L16_002e0e28.s", FUN_L16_002e0e28);

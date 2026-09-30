@@ -5,7 +5,49 @@
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_0029eb20.s", FUN_L04_0029eb20);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_0029ecf8.s", FUN_L04_0029ecf8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002a5a08.s", FUN_L04_002a5a08);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002ba3e0.s", FUN_L04_002ba3e0);
+#define NOT_SDA
+
+#define MACRO_ADDR
+
+/* Ported from rac1-decomp (PAL, src/overlays/l04_eudora/vendor_0029FCF0.c: func_L04_002BB670), where it is exact; names translated to the US level program. */
+
+typedef struct {
+    char _pad00[0x10];
+    unsigned char nframes; /* 0x10 */
+} AnimSeq;
+
+typedef struct {
+    char _pad00[0x48];
+    AnimSeq *seqs[1]; /* 0x48 */
+} AnimClass;
+
+typedef struct {
+    char _pad00[0x24];
+    AnimClass *pClass;       /* 0x24 */
+    char _pad28[0x50 - 0x28];
+    unsigned char frame;     /* 0x50 */
+    unsigned char nextFrame; /* 0x51 */
+    unsigned char seq;       /* 0x52 */
+    unsigned char prevSeq;   /* 0x53 */
+    char _pad54[0x5C - 0x54];
+    float unk5C;             /* 0x5C */
+    char _pad60[0x68 - 0x60];
+    float *frameData;        /* 0x68 */
+    char _pad6C[4];
+    unsigned char unk70;     /* 0x70 */
+} MobyAnim;
+
+void blend_moby_animation(MobyAnim *arg0, int arg1, int arg2, int arg3) __asm__("FUN_00212f90");
+
+void FUN_L04_002ba3e0(char *arg, void *a, void *b, void *c) {
+    char *data = *(char **)(arg + 0x78);
+    void *other;
+    blend_moby_animation(arg, a, b, c);
+    other = *(void **)(data + 0x424);
+    if (other != 0) {
+        blend_moby_animation(other, a, b, c);
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002ba448.s", FUN_L04_002ba448);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002ba470.s", FUN_L04_002ba470);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002ba520.s", FUN_L04_002ba520);
@@ -15,7 +57,21 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c1e98.s", FUN_L04_002c1e98);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c1fb8.s", FUN_L04_002c1fb8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c2270.s", FUN_L04_002c2270);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c41e0.s", FUN_L04_002c41e0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c4808.s", FUN_L04_002c4808);
+extern void DeleteMoby(void *) __asm__("FUN_0020c828");
+
+/* Ported from rac1-decomp (PAL, src/overlays/l04_eudora/vendor_0029FCF0.c: func_L04_002C5B88), where it is exact; names translated to the US level program. */
+
+extern void FUN_L04_002c46d0(void *);
+
+void FUN_L04_002c4808(char *arg) {
+    char *data = *(char **)(arg + 0x78);
+    void *other = *(void **)(data + 0xF8);
+    if (other != 0) {
+        DeleteMoby(other);
+    }
+    FUN_L04_002c46d0(arg);
+    DeleteMoby(arg);
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c4850.s", FUN_L04_002c4850);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c6858.s", FUN_L04_002c6858);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L04_002c6bb8.s", FUN_L04_002c6bb8);

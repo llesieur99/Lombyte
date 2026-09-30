@@ -11,8 +11,60 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f0390.s", FUN_L18_002f0390);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f06c0.s", FUN_L18_002f06c0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f0848.s", FUN_L18_002f0848);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f16f0.s", FUN_L18_002f16f0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f1c38.s", FUN_L18_002f1c38);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f1cc8.s", FUN_L18_002f1cc8);
+#define NOT_SDA
+
+#define MACRO_ADDR
+
+/* Ported from rac1-decomp (PAL, src/overlays/l18_veldin2/vendor_002F2AE0.c: func_L18_002F3038), where it is exact; names translated to the US level program. */
+
+extern void FUN_L18_002f1d08(int, int);
+extern void FUN_L18_002fa888(int, int);
+
+void FUN_L18_002f1c38(unsigned char *moby) {
+    char *state = *(char **)(moby + 0x78);
+    if (*(short *)(moby + 0xA6) == 0x565 && moby[0x20] == 1) {
+        if (*(int *)(state + 0xC) != -1) {
+            FUN_L18_002f1d08(0x802, *(int *)(state + 0xC));
+            FUN_L18_002f1d08(0x908, *(int *)(state + 0xC));
+            FUN_L18_002f1d08(0x954, *(int *)(state + 0xC));
+        }
+        moby[0x20] = 2;
+        FUN_L18_002fa888(moby[0x21], 1);
+    }
+}
+/* Reset this vendor moby's counters before its per-frame update. */
+/* Ported from rac1-decomp (PAL, src/overlays/l18_veldin2/vendor_002F2AE0.c: func_L18_002F30C8), where it is exact; names translated to the US level program. */
+
+typedef struct {
+    char pad0[0x20];
+    unsigned char state;
+    char pad21[0x57];
+    struct L18VD_1cc8 *data;
+    char pad7C[0x2A];
+    short class_id;
+} L18VM_1cc8;
+
+typedef struct L18VD_1cc8 {
+    char pad0[0x30];
+    char update_data[0x300];
+    int field330;
+    char pad334[4];
+    int field338;
+    char pad33C[8];
+    int field344;
+} L18VD_1cc8;
+
+extern void FUN_L12_0027b370(L18VM_1cc8 *, void *, int);
+
+void FUN_L18_002f1cc8(L18VM_1cc8 *moby) {
+    L18VD_1cc8 *data = moby->data;
+    if (moby->class_id == 0x565) {
+        moby->state = 1;
+        data->field330 = 0;
+        data->field344 = 0;
+    }
+    FUN_L12_0027b370(moby, data->update_data, data->field338);
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f1d08.s", FUN_L18_002f1d08);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f1e68.s", FUN_L18_002f1e68);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f1fd8.s", FUN_L18_002f1fd8);
@@ -32,7 +84,21 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f6e10.s", FUN_L18_002f6e10);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f6fa8.s", FUN_L18_002f6fa8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f7028.s", FUN_L18_002f7028);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f70b8.s", FUN_L18_002f70b8);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f7220.s", FUN_L18_002f7220);
+typedef unsigned int u128_f7220 __attribute__((mode(TI)));
+extern float FastSubRots(float, float) __asm__("FUN_001fa5c8");
+
+/* Ported from rac1-decomp (PAL, src/overlays/l18_veldin2/vendor_002F2AE0.c: func_L18_002F8680), where it is exact; names translated to the US level program. */
+
+typedef union { u128_f7220 quad; float f[4]; } L18Vector;
+
+extern float FUN_L00_001ff8b0(float, float);
+
+void FUN_L18_002f7220(char *source, char *dest, L18Vector *from, L18Vector *to) {
+    L18Vector a, b;
+    a.quad = from->quad;
+    b.quad = to->quad;
+    *(float *)(dest + 0x68) = FastSubRots(FUN_L00_001ff8b0(b.f[0] - a.f[0], b.f[1] - a.f[1]), *(float *)(source + 0x48));
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f7288.s", FUN_L18_002f7288);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f76a0.s", FUN_L18_002f76a0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L18_002f7880.s", FUN_L18_002f7880);
