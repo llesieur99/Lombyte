@@ -12,6 +12,11 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASELINE_ROOT="${BASELINE_ROOT:-$PROJECT_ROOT/build/baseline}"
 VENV="${VENV:-$PROJECT_ROOT/.venv}"
+# R5900 binutils: setup.sh installs them into the checkout; /opt is the
+# older manual location.
+if [[ -z "${BINUTILS_ROOT:-}" && -d "$PROJECT_ROOT/tools/binutils-mips-ps2-decompals" ]]; then
+  BINUTILS_ROOT="$PROJECT_ROOT/tools/binutils-mips-ps2-decompals"
+fi
 BINUTILS_ROOT="${BINUTILS_ROOT:-/opt/binutils-mips-ps2-decompals}"
 COMPILER_ROOT="${COMPILER_ROOT:-$PROJECT_ROOT/tools/compilers}"
 # Per-unit textbin ee-gcc (Windows PE): lives in the repository so the driver

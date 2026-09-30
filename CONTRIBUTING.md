@@ -13,8 +13,14 @@ build instead of slipping through.
 
 ### 1. Build the baseline once
 
-Follow [Building](README.md#building) to install the required toolchain and
-provide your own copy of the game, then run:
+```sh
+./setup.sh --iso /path/to/your-ratchet-and-clank-usa.iso
+```
+
+installs the toolchain, extracts the boot executable from your own disc image
+and runs the first `make elf` (see [Quick setup](README.md#quick-setup) for
+Windows, WSL and macOS, and [docs/building.md](docs/building.md) for the manual
+route). Afterwards, rebuild at any time with:
 
 ```sh
 make elf

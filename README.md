@@ -47,6 +47,28 @@ Only this release is currently targeted. PAL, NTSC-J, and the PlayStation 3 rema
 
 Contributions to matching C, recovered names, types, and documentation are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow and verification requirements.
 
+<h4>Quick setup</h4>
+
+One command installs the toolchain, builds the game compiler from source, takes the boot executable from your own disc image, and rebuilds the game byte-for-byte:
+
+```sh
+git clone https://github.com/mateuszklysz/Lombyte.git && cd Lombyte
+./setup.sh --iso /path/to/your-ratchet-and-clank-usa.iso
+```
+
+It ends with `PASS: reconstructed boot ELF matches retail`; from there, [CONTRIBUTING.md](CONTRIBUTING.md) shows how to pick a function and check your C.
+
+| Platform                          | How                                                                                                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Linux (Ubuntu 24.04+, Debian 13+) | the two lines above                                                                                                                                                     |
+| Windows                           | in PowerShell: `wsl --install -d Ubuntu`, reboot, open Ubuntu and run the two lines above from your Linux home directory (`~`, not `/mnt/c`)                             |
+| WSL                               | same as Linux                                                                                                                                                           |
+| macOS, other Linux distributions  | with [Docker](https://docs.docker.com/get-docker/): `./setup.sh --docker --iso ...`, then `./setup.sh --shell` for a shell with the toolchain (`make elf`, `check-unit`) |
+
+Already have the executable? `./setup.sh --elf /path/to/SCUS_971.99`. `./setup.sh --check` lists what is installed, `./setup.sh --help` the rest.
+
+The script ships nothing proprietary: it downloads the toolchain from the public mirrors the PS2 decompilation community uses and checks every file against a pinned SHA-256, builds the game compiler from its GPL source and this repository's [patch stack](patches/sce-991111b/README.md), and only ever reads the game from the disc image or executable you provide. The details, and the manual route, are in [docs/building.md](docs/building.md).
+
 Work-in-progress C is also welcome when it preserves the matching baseline. Do not submit game images, extracted game data, or proprietary compiler binaries.
 
 <h3>Credits</h3>

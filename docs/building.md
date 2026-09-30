@@ -1,5 +1,12 @@
 # Building
 
+`./setup.sh` does everything on this page for you (see
+[Quick setup](../README.md#quick-setup)): it downloads and hash-checks the
+public toolchain releases into `tools/`, builds the game compiler from source
+with `scripts/build-game-compiler.py`, creates `.venv`, takes the boot
+executable from your disc image, and runs the gate. The rest of this page is
+the manual route and the reference for what the script installs.
+
 The verified environment is **Linux/WSL**. Compiler versions matter for
 matching: preserve the directory layouts and the executable permissions, and
 expect the toolchain binaries to be installed by you — nothing here is
@@ -17,7 +24,7 @@ sibling tooling repository points at this checkout.
 | Game compiler (Sony/Cygnus EE `2.9-ee-991111b`)     | `tools/compilers/game-compiler/` (with `ee-gcc` and `cc1`)                        |
 | SDK compiler (EE-GCC `2.9-ee-991111-01`)            | `tools/compilers/sdk-compiler/` (with `bin/ee-gcc`)                               |
 | SN EE-GCC `2.95.2` (its `ee/bin/Ps2EeAs.exe`)      | `tools/compilers/ee-gcc-2.95.2/` (with `bin/ee-gcc.exe` and its supporting tools) |
-| R5900 binutils                                      | the `mips-ps2-decompals-*` executables; set `BINUTILS_ROOT` to their directory    |
+| R5900 binutils                                      | `tools/binutils-mips-ps2-decompals/`, or set `BINUTILS_ROOT` to their directory   |
 | [objdiff CLI](https://github.com/encounter/objdiff) | `tools/objdiff/objdiff-cli`                                                       |
 | Ninja, Python dependencies                          | installed into `.venv` below                                                      |
 
@@ -41,8 +48,16 @@ needs for `<stdarg.h>`
 includes `<stdarg.h>` cannot compile. Build it from the patch stack in
 [`patches/sce-991111b/`](../patches/sce-991111b/README.md), which records the
 pinned source archive, its SHA-256 and the host recipe that reproduces the
-expected `cc1`; then install the result as `tools/compilers/game-compiler`, or
-point `GAME_COMPILER_ROOT` at it.
+expected `cc1`: `python3 scripts/build-game-compiler.py` downloads the
+archive, applies the stack and installs `cc1`, `cpp`, `xgcc`, the patched `as`,
+the `ee-gcc` wrapper and the headers into `tools/compilers/game-compiler`
+(about a minute; `--archive` reuses a local copy of the source archive). Or
+point `GAME_COMPILER_ROOT` at an existing build.
+
+The game code is assembled by the EE assembler of SN ProDG 3.01
+(`ps2eeas` 1.9.25.758, installed as `ee/bin/Ps2EeAs.exe` in the SN tree);
+the older assembler shipped in the ProDG 2.0 compiler archive pads loops
+differently and fails the gate.
 
 Some units in `ROUTE_EXCEPTIONS` build with a patched EE-GCC profile, built
 separately. See [patched-toolchain.md](patched-toolchain.md) for the build and
