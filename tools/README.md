@@ -1,7 +1,7 @@
 # `tools/` — local toolchain (not tracked)
 
-Install the matching toolchain here; the directory contents are ignored by Git
-(only this README is tracked).
+`../setup.sh` installs the matching toolchain here; the directory contents are
+ignored by Git (only this README is tracked).
 
 The expected layout and versions are documented in
 [docs/building.md](../docs/building.md): the two compilers of the retail build,
