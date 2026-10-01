@@ -86,9 +86,16 @@ def build_environment() -> dict:
     venv_bin = ROOT / ".venv" / "bin"
     if venv_bin.is_dir():
         prefix.append(str(venv_bin))
-    binutils = Path(os.environ.get("BINUTILS_ROOT", "/opt/binutils-mips-ps2-decompals"))
-    if binutils.is_dir():
-        prefix.append(str(binutils))
+    binutils = os.environ.get("BINUTILS_ROOT")
+    candidates = (
+        [Path(binutils)]
+        if binutils
+        else [ROOT / "tools" / "binutils-mips-ps2-decompals", Path("/opt/binutils-mips-ps2-decompals")]
+    )
+    for candidate in candidates:
+        if candidate.is_dir():
+            prefix.append(str(candidate))
+            break
     if prefix:
         env["PATH"] = os.pathsep.join(prefix + [env.get("PATH", "")])
     return env

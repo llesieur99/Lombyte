@@ -13,8 +13,14 @@ build instead of slipping through.
 
 ### 1. Build the baseline once
 
-Follow [Building](docs/building.md) to install the required toolchain and
-provide your own copy of the game, then run:
+```sh
+./setup.sh --iso /path/to/your-ratchet-and-clank-usa.iso
+```
+
+installs the toolchain, extracts the boot executable from your own disc image
+and runs the first `make elf` (see [Quick setup](docs/building.md#quick-setup) for
+Windows, WSL and macOS, and [docs/building.md](docs/building.md) for the manual
+route). Afterwards, rebuild at any time with:
 
 ```sh
 make elf
@@ -116,6 +122,12 @@ Once the unit matches, make the C the only compiled code:
 4. Run `make elf` again; it must end with `PASS`.
 5. Regenerate the decomp.dev progress report with `make progress` and commit
    `progress/report.json` with the promotion; CI fails if it is stale.
+6. Regenerate the progress map from that report and commit
+   `assets/decomp_map.svg` and `assets/decomp_map.json` with it:
+
+   ```sh
+   .venv/bin/python scripts/generate_treemap.py
+   ```
 
 ### 7. Open a pull request
 
