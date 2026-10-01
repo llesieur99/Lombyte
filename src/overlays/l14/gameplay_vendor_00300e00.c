@@ -2,6 +2,43 @@
 #include "types.h"
 #include "asm.h"
 
+/* Oltanis (level 14) vendor code.  Both bodies below were written from the
+ * retail disassembly and reproduce it byte for byte on the game compiler
+ * route (cc1 sce-991111b + GNU as, -O2 -G2). */
+
+extern int D_001413DC;
+extern u8 *D_L14_00167500;
+
+/* 0x003135B8, 80 bytes.  When the level record's field at 0x86 is 7, seed the
+ * sub-record reached through +0x70 with the caller's argument and two float
+ * constants, and set both floats on the record itself. */
+void FUN_L14_003135b8(u8 *arg0)
+{
+    u8 *g = D_L14_00167500;
+    u8 *q;
+    u8 *p;
+
+    if (*(s16 *)(g + 0x86) != 7) {
+        return;
+    }
+    q = *(u8 **)(g + 0x70) + 0x40;
+    *(s32 *)(q + 0x40) = 1;
+    *(s32 *)(q + 0x44) = (s32)arg0;
+    *(f32 *)(q + 0x4C) = 2.0f;
+    p = *(u8 **)(g + 0x70);
+    *(f32 *)(p + 0xA0) = 7.0f;
+    *(f32 *)(p + 0xB0) = 2.0f;
+}
+
+/* 0x003167E0, 36 bytes.  While the executable's mode word is not 0xF, mark the
+ * object's field at 0x7E as 3. */
+void FUN_L14_003167e0(u8 *arg0)
+{
+    if (D_001413DC != 0x0F) {
+        *(s16 *)(arg0 + 0x7E) = 3;
+    }
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00300e00.s", FUN_L14_00300e00);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003014e0.s", FUN_L14_003014e0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00305408.s", FUN_L14_00305408);
@@ -20,7 +57,6 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00307510.s", FUN_L14_00307510);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00307620.s", FUN_L14_00307620);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00307a80.s", FUN_L14_00307a80);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003087c0.s", FUN_L14_003087c0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003135b8.s", FUN_L14_003135b8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00314e18.s", FUN_L14_00314e18);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00314f00.s", FUN_L14_00314f00);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00315290.s", FUN_L14_00315290);
@@ -29,4 +65,3 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003159d8.s", FUN_L14_003159d8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00315d48.s", FUN_L14_00315d48);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_00316748.s", FUN_L14_00316748);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003167c4.s", FUN_L14_003167c4);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L14_003167e0.s", FUN_L14_003167e0);
