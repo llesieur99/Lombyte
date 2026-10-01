@@ -2,15 +2,15 @@
   "schema": "rnc-public-progress-v3",
   "source": "scripts/generate_treemap.py",
   "units_total": 4782,
-  "matching_c": 1732,
+  "matching_c": 1733,
   "intentional_asm": 249,
-  "pending_c": 2801,
+  "pending_c": 2800,
   "bytes_total": 3655312,
-  "bytes_matching_c": 410584,
+  "bytes_matching_c": 410652,
   "bytes_intentional_asm": 96332,
-  "bytes_pending_c": 3148396,
-  "c_exact_percent_of_recoverable": 11.5366,
-  "c_fuzzy_percent_of_recoverable": 13.5816,
+  "bytes_pending_c": 3148328,
+  "c_exact_percent_of_recoverable": 11.5385,
+  "c_fuzzy_percent_of_recoverable": 13.5835,
   "boot": {
     "units_total": 1442,
     "groups_total": 127,
@@ -1933,24 +1933,24 @@
   },
   "overlays": {
     "functions_total": 3340,
-    "matching_c": 686,
-    "pending_c": 2654,
+    "matching_c": 687,
+    "pending_c": 2653,
     "bytes_total": 3218660,
-    "bytes_matching_c": 190812,
-    "bytes_pending_c": 3027848,
-    "c_exact_percent_of_recoverable": 5.9283,
+    "bytes_matching_c": 190880,
+    "bytes_pending_c": 3027780,
+    "c_exact_percent_of_recoverable": 5.9304,
     "shared": {
       "id": "shared",
       "index": null,
       "planet": "Shared code",
       "description": "functions present in two or more levels",
       "functions": 1961,
-      "matching_c": 518,
-      "pending_c": 1443,
+      "matching_c": 519,
+      "pending_c": 1442,
       "bytes_total": 1190248,
-      "bytes_matching_c": 153312,
-      "bytes_pending_c": 1036936,
-      "c_exact_percent_of_recoverable": 12.8807,
+      "bytes_matching_c": 153380,
+      "bytes_pending_c": 1036868,
+      "c_exact_percent_of_recoverable": 12.8864,
       "files": [
         {
           "file": "src/overlays/shared/start_001eaa08.c",
@@ -2270,9 +2270,9 @@
         {
           "file": "src/overlays/shared/ui_help_00231d08.c",
           "functions": 49,
-          "matching_c": 30,
+          "matching_c": 31,
           "bytes_total": 12208,
-          "bytes_matching_c": 5044
+          "bytes_matching_c": 5112
         },
         {
           "file": "src/overlays/shared/ui_hud_00234fd0.c",
@@ -4694,14 +4694,14 @@
   },
   "total": {
     "units_total": 4782,
-    "matching_c": 1732,
+    "matching_c": 1733,
     "intentional_asm": 249,
-    "pending_c": 2801,
+    "pending_c": 2800,
     "bytes_total": 3655312,
-    "bytes_matching_c": 410584,
+    "bytes_matching_c": 410652,
     "bytes_intentional_asm": 96332,
-    "bytes_pending_c": 3148396,
-    "c_exact_percent_of_recoverable": 11.5366,
-    "c_fuzzy_percent_of_recoverable": 13.5816
+    "bytes_pending_c": 3148328,
+    "c_exact_percent_of_recoverable": 11.5385,
+    "c_fuzzy_percent_of_recoverable": 13.5835
   }
 }
