@@ -476,7 +476,22 @@ void FUN_L00_00233248(void) {
         *(unsigned short *)(obj + 0x34) &= ~1;
     }
 }
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00233288.s", FUN_L00_00233288);
+/* 0x00233288, 68 bytes.  The datum it reaches is a
+ * table (the address is materialised with lui + addiu).
+ * Ported from rac1-decomp (PAL, shared level code), where it is
+ * exact; names translated to the US level program. */
+extern char D_0013F350[];
+/* Stores two floats, an index and a byte, and sets the bits of a byte mask in a flag halfword. */
+void FUN_L00_00233288(float a, float b, short c, unsigned char d, unsigned char e, unsigned char f) {
+    char *base = D_0013F350;
+
+    *(int *)(base + 0x12A8) = c;
+    *(short *)(base + 0x12AC) = d;
+    *(unsigned short *)(base + 0x12AE) = (*(unsigned short *)(base + 0x12AE) & ~f) | e;
+    *(float *)(base + 0x12A0) = a;
+    *(float *)(base + 0x12A4) = b;
+}
+
 typedef unsigned int u128_2332d0 __attribute__((mode(TI), aligned(16)));
 typedef union { u128_2332d0 q; float f[4]; } Vec4_2332d0;
 typedef struct { u8 p0[0x90]; Vec4_2332d0 v90; u8 p1[0x270 - 0xA0]; Vec4_2332d0 v270; } S13F350_2332d0;

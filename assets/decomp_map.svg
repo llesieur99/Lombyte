@@ -3,13 +3,13 @@
 <title>Ratchet &amp; Clank - decompilation progress</title>
 <rect width="800" height="1086" fill="#0d1117"/>
 <defs><linearGradient id="progress-range" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3632"/><stop offset="1" stop-color="#d87620"/></linearGradient><linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#de812f" stop-opacity="0.10"/><stop offset="0.5" stop-color="#de812f" stop-opacity="0.02"/><stop offset="1" stop-color="#000000" stop-opacity="0.08"/></linearGradient><linearGradient id="drawer-face" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2816"/><stop offset="1" stop-color="#2a1d10"/></linearGradient><radialGradient id="drawer-halo"><stop offset="0" stop-color="#0d1117" stop-opacity="0.8"/><stop offset="0.6" stop-color="#0d1117" stop-opacity="0.55"/><stop offset="1" stop-color="#0d1117" stop-opacity="0"/></radialGradient></defs>
-<text x="10" y="24" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#a6adc8">1,732 of 4,782 functions in C &#183; executable and 19 level overlays</text>
+<text x="10" y="24" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#a6adc8">1,733 of 4,782 functions in C &#183; executable and 19 level overlays</text>
 <rect x="629" y="9" width="10" height="10" rx="2" fill="#de812f"></rect>
-<text x="644" y="18" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#a6adc8">matching C &#183; 410,584 B</text>
+<text x="644" y="18" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#a6adc8">matching C &#183; 410,652 B</text>
 <rect x="629" y="26" width="10" height="10" rx="2" fill="#c3cbd8"></rect>
 <text x="644" y="35" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#a6adc8">intentional asm &#183; 96,332 B</text>
 <rect x="629" y="43" width="10" height="10" rx="2" fill="url(#progress-range)"><title>Pending C: dark plate to copper shows C_EXACT coverage; bolt orange marks 100% exact.</title></rect>
-<text x="644" y="52" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#a6adc8">pending C &#183; 3,148,396 B</text>
+<text x="644" y="52" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#a6adc8">pending C &#183; 3,148,328 B</text>
 <text x="619" y="38" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="800" fill="#de812f">11.5%</text>
 <text x="619" y="52" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#a6adc8">C_EXACT &#183; executable + overlays</text>
 <rect x="10" y="62" width="780" height="86" fill="url(#drawer-face)"><title>Boot ELF SCUS_971.99: 219,772 of 340,320 recoverable bytes are matching C (64.6%); 1046 matching, 147 pending, 249 intentional asm units</title></rect>
@@ -148,13 +148,13 @@
 <text x="22" y="79" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#c3cbd8" style="paint-order:stroke" stroke="#0d1117" stroke-width="3.15" stroke-opacity="0.7">BOOT ELF &#183; SCUS_971.99</text>
 <text x="400.0" y="112.0" text-anchor="middle" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="36" font-weight="800" fill="#de812f" style="paint-order:stroke" stroke="#0d1117" stroke-width="2.1" stroke-opacity="0.6">64.6%</text>
 <text x="400.0" y="130.0" text-anchor="middle" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#e8edf5" fill-opacity="0.95" style="paint-order:stroke" stroke="#0d1117" stroke-width="2.1" stroke-opacity="0.7">C_EXACT of the executable &#183; C_FUZZY 86.0%</text>
-<text x="10" y="166" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#c3cbd8" fill-opacity="0.9">LEVEL OVERLAYS &#183; 190,812 of 3,218,660 B matching C (5.9%)</text>
+<text x="10" y="166" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#c3cbd8" fill-opacity="0.9">LEVEL OVERLAYS &#183; 190,880 of 3,218,660 B matching C (5.9%)</text>
 <line x1="24" y1="172" x2="24" y2="1024" stroke="#3a3632" stroke-width="2"/>
 <path d="M 24 188 h 12" stroke="#3a3632" stroke-width="2" fill="none"/>
 <circle cx="24" cy="188" r="3.5" fill="#d87620" stroke="#0d1117" stroke-width="1"/>
 <text x="44" y="192" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="11"><tspan fill="#a6adc8"></tspan><tspan fill="#e8edf5" font-weight="700">Shared code</tspan><tspan fill="#a6adc8"> &#183; functions present in two or more levels</tspan></text>
 <text x="790" y="192" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" fill="#d87620">12.9%</text>
-<text x="790" y="208" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="8.5" fill="#a6adc8">518/1961 fn &#183; 1,190,248 B</text>
+<text x="790" y="208" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="8.5" fill="#a6adc8">519/1961 fn &#183; 1,190,248 B</text>
 <rect x="44.00" y="200" width="0.40" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/start_001eaa08.c: 0/3 functions matching C, 0/1,056 B</title></rect>
 <rect x="45.36" y="200" width="0.40" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_fonts_001eb070.c: 0/1 functions matching C, 0/4 B</title></rect>
 <rect x="46.36" y="200" width="0.40" height="10" rx="1" fill="#c56e22" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/sdk_debug_001eb0b0.c: 1/2 functions matching C, 92/100 B</title></rect>
@@ -200,7 +200,7 @@
 <rect x="167.19" y="200" width="0.75" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00227f10.c: 0/2 functions matching C, 0/2,196 B</title></rect>
 <rect x="168.95" y="200" width="1.00" height="10" rx="1" fill="#935a28" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00229010.c: 4/5 functions matching C, 1,988/2,908 B</title></rect>
 <rect x="170.94" y="200" width="11.40" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00229b70.c: 0/1 functions matching C, 0/33,172 B</title></rect>
-<rect x="183.34" y="200" width="4.19" height="10" rx="1" fill="#64472d" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00231d08.c: 30/49 functions matching C, 5,044/12,208 B</title></rect>
+<rect x="183.34" y="200" width="4.19" height="10" rx="1" fill="#65472d" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00231d08.c: 31/49 functions matching C, 5,112/12,208 B</title></rect>
 <rect x="188.54" y="200" width="0.40" height="10" rx="1" fill="#b76824" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_hud_00234fd0.c: 2/3 functions matching C, 860/1,008 B</title></rect>
 <rect x="189.88" y="200" width="2.01" height="10" rx="1" fill="#473b30" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/gameplay_animation_00235878.c: 6/15 functions matching C, 1,116/5,840 B</title></rect>
 <rect x="192.89" y="200" width="5.61" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/shared/ui_help_00237488.c: 0/18 functions matching C, 0/16,320 B</title></rect>
@@ -601,6 +601,6 @@
 <rect x="491.63" y="1036" width="130.80" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/l18/gameplay_vendor_002efb88.c: 6/39 functions matching C, 612/32,576 B</title></rect>
 <rect x="623.43" y="1036" width="48.57" height="10" rx="1" fill="#3a3632" stroke="#0d1117" stroke-width="0.4"><title>src/overlays/l18/gameplay_vendor_002f88e8.c: 1/19 functions matching C, 80/12,096 B</title></rect>
 <line x1="10" y1="1064.0" x2="790" y2="1064.0" stroke="#3a3632" stroke-width="1" opacity="0.8"/>
-<text x="10" y="1078" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#a6adc8" opacity="0.85">executable 64.6% &#183; overlays 5.9% &#183; 410,584 of 3,655,312 B in C</text>
+<text x="10" y="1078" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#a6adc8" opacity="0.85">executable 64.6% &#183; overlays 5.9% &#183; 410,652 of 3,655,312 B in C</text>
 <text x="790" y="1078" text-anchor="end" font-family="ui-sans-serif, -apple-system, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#a6adc8" opacity="0.85">generated 2026-10-01 &#183; scripts/generate_treemap.py</text>
 </svg>
