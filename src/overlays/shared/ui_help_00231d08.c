@@ -873,7 +873,46 @@ void FUN_L00_002347c0(void) {
     }
 }
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00234808.s", FUN_L00_00234808);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00234a50.s", FUN_L00_00234a50);
+/* in state 2 or 6: flag the matching mobys, update, then clear bit 0 of three mobys */
+/* Ported from rac1-decomp (PAL, src/overlays/shared/help_00232560.c: func_L00_002352D0), where it is exact; names translated to the US level program. */
+
+extern char D_L00_0016C860[];
+extern void FUN_L00_00209240(int);
+extern void FUN_L00_0020f580(void);
+extern void FUN_L00_00234808(void);
+
+void FUN_L00_00234a50(int a0) {
+    char *d;
+    char *base;
+    char *o;
+    char *t;
+    int i;
+    if (D_L00_0015F5C4 == 2 || D_L00_0015F5C4 == 6) {
+        d = D_L00_0016C860;
+        for (i = 0; i < *(short *)(d + 0x44); i++) {
+            o = *(char **)(d + 0x178 + i * 4);
+            if ((unsigned short)(*(unsigned short *)(o + 0xA6) - 0x509) < 2) {
+                *(unsigned short *)(o + 0x34) |= 0x800;
+            }
+        }
+        FUN_L00_00209240(a0);
+        FUN_L00_0020f580();
+        FUN_L00_00234808();
+        base = D_0013F350;
+        t = *(char **)(base + 0x11D0);
+        if (t != 0) {
+            *(unsigned short *)(t + 0x34) &= 0xFFFE;
+        }
+        t = *(char **)(base + 0x11D4);
+        if (t != 0) {
+            *(unsigned short *)(t + 0x34) &= 0xFFFE;
+        }
+        t = *(char **)(base + 0x1220);
+        if (t != 0) {
+            *(unsigned short *)(t + 0x34) &= 0xFFFE;
+        }
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00234b38.s", FUN_L00_00234b38);
 extern char D_L00_0017A608[];
 extern char D_L00_0017C680[];
