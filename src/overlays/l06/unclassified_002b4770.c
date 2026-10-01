@@ -4,11 +4,69 @@
 
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002b4770.s", FUN_L06_002b4770);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002d9d10.s", FUN_L06_002d9d10);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002d9e08.s", FUN_L06_002d9e08);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002d9e78.s", FUN_L06_002d9e78);
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002d9e08, 108 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+// Walks a moby index list and, for each moby of one type, sets its state to 2 and a float to 1.0.
+void FUN_L06_002d9e08(int index)
+{
+    short *p = D_L06_001ABFC0[index];
+    if (p != 0) {
+        do {
+            char *moby = (char *)(((*(unsigned short *)p & 0x7FFF) << 8) + (int)D_L00_0015FFD8);
+            if (*(short *)(moby + 0xA6) == 0x16F) {
+                moby[0x20] = 2;
+                *(float *)(*(char **)(moby + 0x78) + 0x28) = 1.0f;
+            }
+        } while (*p++ >= 0);
+    }
+}
+
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002d9e78, 100 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+void FUN_L06_002d9e78(int idx)
+{
+    short *p = D_L06_001ABFC0[idx];
+    if (p != 0) {
+        do {
+            char *moby = (char *)(((*p & 0x7FFF) << 8) + (int)D_L00_0015FFD8);
+            if (*(short *)(moby + 0xA6) == 0x16F) {
+                char *data = *(char **)(moby + 0x78);
+                moby[0x20] = 2;
+                *(int *)(data + 0x28) = 0;
+            }
+        } while (*p++ >= 0);
+    }
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9d10.s", FUN_L06_002e9d10);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9e28.s", FUN_L06_002e9e28);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9e30.s", FUN_L06_002e9e30);
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002e9e30, 108 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+/* Switches every moby listed in a table into state 15 until a negative entry. */
+void FUN_L06_002e9e30(int index) {
+    short *p = D_L06_001ABFC0[index];
+    do {
+        char *moby = D_L00_0015FFD8 + ((*(unsigned short *)p & 0x7FFF) << 8);
+        if ((unsigned char)moby[0x20] < 0x7F) {
+            unsigned short flags = *(unsigned short *)(moby + 0x34);
+            moby[0x20] = 15;
+            flags |= 0x41;
+            *(int *)(moby + 0x94) = 0;
+            flags &= 0xEFFF;
+            *(unsigned short *)(moby + 0x34) = flags;
+        }
+    } while (*p++ >= 0);
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9ea0.s", FUN_L06_002e9ea0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9ec8.s", FUN_L06_002e9ec8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002e9f18.s", FUN_L06_002e9f18);
@@ -16,8 +74,38 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f3ad8.s", FUN_L06_002f3ad8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f3d70.s", FUN_L06_002f3d70);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f4130.s", FUN_L06_002f4130);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f4390.s", FUN_L06_002f4390);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f45a0.s", FUN_L06_002f45a0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f45f0.s", FUN_L06_002f45f0);
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002f45a0, 80 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+/* Clears state 4 from every moby in the selected table. */
+void FUN_L06_002f45a0(int idx)
+{
+    short *p = D_L06_001ABFC0[idx];
+    do {
+        char *moby = (char *)(((*p & 0x7FFF) << 8) + (int)D_L00_0015FFD8);
+        if ((unsigned char)moby[0x20] == 4) {
+            moby[0x20] = 0;
+        }
+    } while (*p++ >= 0);
+}
+
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002f45f0, 72 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+/* Sets each moby in the selected table to state 4 until its terminal entry. */
+void FUN_L06_002f45f0(int idx)
+{
+    short *p = D_L06_001ABFC0[idx];
+    do {
+        char *moby = (char *)(((*p & 0x7FFF) << 8) + (int)D_L00_0015FFD8);
+        moby[0x20] = 4;
+    } while (*p++ >= 0);
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f5360.s", FUN_L06_002f5360);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f53e8.s", FUN_L06_002f53e8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f54a0.s", FUN_L06_002f54a0);
@@ -28,10 +116,71 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f6dd0.s", FUN_L06_002f6dd0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f7000.s", FUN_L06_002f7000);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f7d78.s", FUN_L06_002f7d78);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f91e8.s", FUN_L06_002f91e8);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f9698.s", FUN_L06_002f9698);
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002f9698, 96 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+void FUN_L06_002f9698(char *arg)
+{
+    short *table = D_L06_001ABFC0[(unsigned char)arg[0x21]];
+    if (table != 0) {
+        short *p = table;
+        do {
+            char *moby = (char *)(((*p & 0x7FFF) << 8) + (int)D_L00_0015FFD8);
+            if ((unsigned char)moby[0x20] == 1) {
+                moby[0x20] = 2;
+            }
+        } while (*p++ >= 0);
+    }
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f96f8.s", FUN_L06_002f96f8);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f9948.s", FUN_L06_002f9948);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f99b0.s", FUN_L06_002f99b0);
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002f9948, 100 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+void FUN_L06_002f9948(int idx)
+{
+    short *p = D_L06_001ABFC0[idx];
+    if (p != 0) {
+        do {
+            char *moby = D_L00_0015FFD8 + ((*p & 0x7FFF) << 8);
+            unsigned short flags = *(unsigned short *)(moby + 0x34);
+            moby[0x20] = 0x12;
+            flags |= 1;
+            *(int *)(moby + 0x94) = 0;
+            flags &= 0xEFFF;
+            *(unsigned short *)(moby + 0x34) = flags;
+        } while (*p++ >= 0);
+    }
+}
+
+extern int D_L06_001ABFC0[];
+extern int D_L00_0015FFD8 __attribute__((section(".sdata")));
+/* 0x002f99b0, 120 bytes.
+ * Ported from rac1-decomp (PAL), where it is exact; names translated to
+ * the US level program (data still reached through the MACRO_ADDR form). */
+// Resets every moby of a list that is in state 0x12.
+void FUN_L06_002f99b0(int index)
+{
+    short *p = D_L06_001ABFC0[index];
+    if (p != 0) {
+        do {
+            char *moby = (char *)((*(unsigned short *)p & 0x7FFF) << 8) + (int)D_L00_0015FFD8;
+            if ((unsigned char)moby[0x20] == 0x12) {
+                unsigned short flags = *(unsigned short *)(moby + 0x34);
+                moby[0x20] = 0;
+                flags &= 0xFFFE;
+                flags |= 0x1000;
+                *(int *)(moby + 0x94) = *(int *)(*(char **)(moby + 0x24) + 0x10);
+                *(unsigned short *)(moby + 0x34) = flags;
+            }
+        } while (*p++ >= 0);
+    }
+}
+
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002f9a28.s", FUN_L06_002f9a28);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002fa9c0.s", FUN_L06_002fa9c0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L06_002fb090.s", FUN_L06_002fb090);
