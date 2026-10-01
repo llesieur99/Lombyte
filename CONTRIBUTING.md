@@ -13,7 +13,7 @@ build instead of slipping through.
 
 ### 1. Build the baseline once
 
-Follow [Building](README.md#building) to install the required toolchain and
+Follow [Building](docs/building.md) to install the required toolchain and
 provide your own copy of the game, then run:
 
 ```sh
