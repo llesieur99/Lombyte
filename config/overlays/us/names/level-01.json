@@ -1,14 +1,15 @@
 {
  "schema": "rnc-overlay-name-evidence-v1",
  "level": "level-01",
- "generated": "2026-09-16T08:34:40+00:00",
+ "generated": "2026-10-02T15:24:09+00:00",
  "method": [
   "preview-build function matches (normalized instruction hashes)",
-  "exact boot-symbol matches (normalized instruction hashes)"
+  "exact boot-symbol matches (normalized instruction hashes)",
+  "moby class names from each level program's lvl.vtbl dispatch records, joined with the Wrench moby_classes unpack (the record's first word is the class id, the directory name carries it)"
  ],
  "stats": {
-  "functions_with_evidence": 545,
-  "named": 244,
+  "functions_with_evidence": 624,
+  "named": 326,
   "with_assert_evidence": 0,
   "assert_records": 0,
   "modules": {}
@@ -7017,6 +7018,96 @@
    }
   },
   {
+   "function": "FUN_L01_002b9eb0",
+   "addr": 2858672,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "novalis_elevator",
+    "method": "moby-class-record",
+    "class_id": 726,
+    "class_ids": [
+     726
+    ],
+    "class_names": [
+     "novalis_elevator"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002a4e48",
+   "addr": 2861000,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "camera_object",
+    "method": "moby-class-record",
+    "class_id": 1007,
+    "class_ids": [
+     1007
+    ],
+    "class_names": [
+     "camera_object"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002a57a8",
+   "addr": 2863400,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "vendor",
+    "method": "moby-class-record",
+    "class_id": 11,
+    "class_ids": [
+     11
+    ],
+    "class_names": [
+     "vendor"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002a5dd8",
+   "addr": 2864984,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bolt",
+    "method": "moby-class-record",
+    "class_id": 13,
+    "class_ids": [
+     13,
+     14,
+     15,
+     16
+    ],
+    "class_names": [
+     "bolt",
+     "bolt_hexnut",
+     "bolt_starnut",
+     "bolt_circlenut"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002bc4f0",
    "addr": 2868464,
    "sources": [
@@ -7092,6 +7183,108 @@
    }
   },
   {
+   "function": "FUN_L00_002a84c8",
+   "addr": 2875840,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "wrench",
+    "method": "moby-class-record",
+    "class_id": 71,
+    "class_ids": [
+     71
+    ],
+    "class_names": [
+     "wrench"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002aa670",
+   "addr": 2883136,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "mine",
+    "method": "moby-class-record",
+    "class_id": 74,
+    "class_ids": [
+     74
+    ],
+    "class_names": [
+     "mine"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002afa48",
+   "addr": 2904600,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "nanotech_crate_fragment",
+    "method": "moby-class-record",
+    "class_id": 348,
+    "class_ids": [
+     348,
+     349,
+     354,
+     355,
+     356,
+     357,
+     358,
+     359,
+     363,
+     364
+    ],
+    "class_names": [
+     "nanotech_crate_fragment",
+     "nanotech_crate_fragment",
+     "metal_crate_fragment",
+     "metal_crate_fragment",
+     "metal_crate_fragment",
+     "crate_fragment",
+     "crate_fragment",
+     "crate_fragment",
+     "explosive_crate_fragment",
+     "explosive_crate_fragment"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b03a0",
+   "addr": 2906992,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "gold_devastator_missile",
+    "method": "moby-class-record",
+    "class_id": 153,
+    "class_ids": [
+     153
+    ],
+    "class_names": [
+     "gold_devastator_missile"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002c72c8",
    "addr": 2912968,
    "sources": [
@@ -7122,6 +7315,48 @@
    }
   },
   {
+   "function": "FUN_L00_002b2100",
+   "addr": 2915688,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "devastator",
+    "method": "moby-class-record",
+    "class_id": 157,
+    "class_ids": [
+     157
+    ],
+    "class_names": [
+     "devastator"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b3058",
+   "addr": 2919616,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "visibomb",
+    "method": "moby-class-record",
+    "class_id": 163,
+    "class_ids": [
+     163
+    ],
+    "class_names": [
+     "visibomb"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002c9da0",
    "addr": 2923936,
    "sources": [
@@ -7135,6 +7370,301 @@
     "addr": 2644976,
     "words": 24
    }
+  },
+  {
+   "function": "FUN_L00_002b49a8",
+   "addr": 2926096,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "blaster",
+    "method": "moby-class-record",
+    "class_id": 168,
+    "class_ids": [
+     168
+    ],
+    "class_names": [
+     "blaster"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b6140",
+   "addr": 2932136,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "visibomb_missile",
+    "method": "moby-class-record",
+    "class_id": 172,
+    "class_ids": [
+     172
+    ],
+    "class_names": [
+     "visibomb_missile"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b6f10",
+   "addr": 2935672,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "taunter",
+    "method": "moby-class-record",
+    "class_id": 175,
+    "class_ids": [
+     175
+    ],
+    "class_names": [
+     "taunter"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b77f0",
+   "addr": 2937944,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "pyrocitor",
+    "method": "moby-class-record",
+    "class_id": 176,
+    "class_ids": [
+     176
+    ],
+    "class_names": [
+     "pyrocitor"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002b87e0",
+   "addr": 2942024,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "tesla_claw",
+    "method": "moby-class-record",
+    "class_id": 177,
+    "class_ids": [
+     177
+    ],
+    "class_names": [
+     "tesla_claw"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002bb558",
+   "addr": 2953664,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "walloper",
+    "method": "moby-class-record",
+    "class_id": 180,
+    "class_ids": [
+     180
+    ],
+    "class_names": [
+     "walloper"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002bc7e8",
+   "addr": 2958416,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "morphoray",
+    "method": "moby-class-record",
+    "class_id": 185,
+    "class_ids": [
+     185
+    ],
+    "class_names": [
+     "morphoray"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002bffa8",
+   "addr": 2972688,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "doom_bot",
+    "method": "moby-class-record",
+    "class_id": 186,
+    "class_ids": [
+     186
+    ],
+    "class_names": [
+     "doom_bot"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c1718",
+   "addr": 2978688,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "trespasser",
+    "method": "moby-class-record",
+    "class_id": 188,
+    "class_ids": [
+     188
+    ],
+    "class_names": [
+     "trespasser"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c1ad0",
+   "addr": 2979640,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "mine_glove",
+    "method": "moby-class-record",
+    "class_id": 190,
+    "class_ids": [
+     190
+    ],
+    "class_names": [
+     "mine_glove"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c26c8",
+   "addr": 2982704,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bomb_glove",
+    "method": "moby-class-record",
+    "class_id": 192,
+    "class_ids": [
+     192
+    ],
+    "class_names": [
+     "bomb_glove"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c4380",
+   "addr": 2990056,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "decoy",
+    "method": "moby-class-record",
+    "class_id": 203,
+    "class_ids": [
+     203,
+     1900
+    ],
+    "class_names": [
+     "decoy",
+     "gold_decoy"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c53c0",
+   "addr": 2994216,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "devestator_ammo",
+    "method": "moby-class-record",
+    "class_id": 204,
+    "class_ids": [
+     204,
+     213,
+     214,
+     222,
+     223,
+     225,
+     226,
+     1006,
+     1438,
+     1447,
+     1449
+    ],
+    "class_names": [
+     "devestator_ammo",
+     "tesla_claw_ammo",
+     "pyrocitor_ammo",
+     "visibomb_ammo",
+     "glove_of_doom_ammo",
+     "mine_glove_ammo",
+     "bomb_glove_ammo",
+     "blaster_ammo",
+     "ryno_ammo",
+     "drone_device_ammo",
+     "decoy_ammo"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_002dba30",
@@ -7152,6 +7682,236 @@
    }
   },
   {
+   "function": "FUN_L00_002c6158",
+   "addr": 2997696,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "swingshot",
+    "method": "moby-class-record",
+    "class_id": 208,
+    "class_ids": [
+     208
+    ],
+    "class_names": [
+     "swingshot"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c7070",
+   "addr": 3001560,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "swingshot_hook",
+    "method": "moby-class-record",
+    "class_id": 209,
+    "class_ids": [
+     209
+    ],
+    "class_names": [
+     "swingshot_hook"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c7a58",
+   "addr": 3004096,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "glove_of_doom",
+    "method": "moby-class-record",
+    "class_id": 229,
+    "class_ids": [
+     229
+    ],
+    "class_names": [
+     "glove_of_doom"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002c89e8",
+   "addr": 3008080,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bomb",
+    "method": "moby-class-record",
+    "class_id": 230,
+    "class_ids": [
+     230
+    ],
+    "class_names": [
+     "bomb"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002e0c68",
+   "addr": 3017832,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bolt_crank",
+    "method": "moby-class-record",
+    "class_id": 280,
+    "class_ids": [
+     280
+    ],
+    "class_names": [
+     "bolt_crank"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002e1ac0",
+   "addr": 3021504,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "gold_weapon_case",
+    "method": "moby-class-record",
+    "class_id": 304,
+    "class_ids": [
+     304,
+     1456,
+     1457,
+     1458,
+     1459,
+     1460,
+     1461,
+     1462,
+     1463,
+     1464,
+     1465
+    ],
+    "class_names": [
+     "gold_weapon_case",
+     "gold_bomb_glove",
+     "gold_pyrocitor",
+     "gold_blaster",
+     "gold_glove_of_doom",
+     "gold_mine_glove",
+     "gold_devastator",
+     "gold_decoy_glove",
+     "gold_tesla_claw",
+     "gold_suck_cannon",
+     "gold_morphoray"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_001e93e8",
+   "addr": 3027120,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "sonic_summoner",
+    "method": "moby-class-record",
+    "class_id": 433,
+    "class_ids": [
+     433
+    ],
+    "class_names": [
+     "sonic_summoner"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002e3f20",
+   "addr": 3030816,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "sand_mouse",
+    "method": "moby-class-record",
+    "class_id": 437,
+    "class_ids": [
+     437
+    ],
+    "class_names": [
+     "sand_mouse"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002cc608",
+   "addr": 3034720,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "ryno",
+    "method": "moby-class-record",
+    "class_id": 454,
+    "class_ids": [
+     454
+    ],
+    "class_names": [
+     "ryno"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002cd1f0",
+   "addr": 3037768,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "rocket",
+    "method": "moby-class-record",
+    "class_id": 457,
+    "class_ids": [
+     457
+    ],
+    "class_names": [
+     "rocket"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002e6790",
    "addr": 3041168,
    "sources": [
@@ -7165,6 +7925,27 @@
     "addr": 2740064,
     "words": 280
    }
+  },
+  {
+   "function": "FUN_L01_002e6bf0",
+   "addr": 3042288,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "birdbot",
+    "method": "moby-class-record",
+    "class_id": 459,
+    "class_ids": [
+     459
+    ],
+    "class_names": [
+     "birdbot"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_002e8dd8",
@@ -7182,6 +7963,144 @@
    }
   },
   {
+   "function": "FUN_L00_002ce358",
+   "addr": 3052216,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "drone",
+    "method": "moby-class-record",
+    "class_id": 479,
+    "class_ids": [
+     479
+    ],
+    "class_names": [
+     "drone"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002cf218",
+   "addr": 3055992,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bolt_crate",
+    "method": "moby-class-record",
+    "class_id": 500,
+    "class_ids": [
+     500,
+     501,
+     502,
+     505,
+     511
+    ],
+    "class_names": [
+     "bolt_crate",
+     "nanotech_crate",
+     "metal_crate",
+     "oom_oom_box",
+     "ammo_crate"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002d1e80",
+   "addr": 3067360,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "veldin_ship",
+    "method": "moby-class-record",
+    "class_id": 530,
+    "class_ids": [
+     530
+    ],
+    "class_names": [
+     "veldin_ship"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_001e93e8",
+   "addr": 3067536,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "green_ship",
+    "method": "moby-class-record",
+    "class_id": 531,
+    "class_ids": [
+     531
+    ],
+    "class_names": [
+     "green_ship"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002d2670",
+   "addr": 3069400,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "decoy_glove",
+    "method": "moby-class-record",
+    "class_id": 562,
+    "class_ids": [
+     562
+    ],
+    "class_names": [
+     "decoy_glove"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002edca0",
+   "addr": 3071136,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "large_amoeboid",
+    "method": "moby-class-record",
+    "class_id": 572,
+    "class_ids": [
+     572,
+     865,
+     866
+    ],
+    "class_names": [
+     "large_amoeboid",
+     "medium_amoeboid",
+     "small_amoeboid"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002efbf8",
    "addr": 3079160,
    "sources": [
@@ -7195,6 +8114,27 @@
     "addr": 2763840,
     "words": 26
    }
+  },
+  {
+   "function": "FUN_L01_002efc60",
+   "addr": 3079264,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "peckbot",
+    "method": "moby-class-record",
+    "class_id": 577,
+    "class_ids": [
+     577
+    ],
+    "class_names": [
+     "peckbot"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_002f1d18",
@@ -7212,12 +8152,65 @@
    }
   },
   {
-   "function": "FUN_002f30c0",
+   "function": "FUN_L00_002d2ee8",
+   "addr": 3089024,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "metal_detector",
+    "method": "moby-class-record",
+    "class_id": 585,
+    "class_ids": [
+     585
+    ],
+    "class_names": [
+     "metal_detector"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f2b68",
+   "addr": 3091304,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "sandmouse_house",
+    "method": "moby-class-record",
+    "class_id": 604,
+    "class_ids": [
+     604
+    ],
+    "class_names": [
+     "sandmouse_house"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002d37d0",
    "addr": 3092672,
    "sources": [
-    "preview-match"
+    "preview-match",
+    "moby-class"
    ],
-   "name_evidence": null,
+   "name_evidence": {
+    "name": "helipack",
+    "method": "moby-class-record",
+    "class_id": 607,
+    "class_ids": [
+     607
+    ],
+    "class_names": [
+     "helipack"
+    ]
+   },
    "modules": [],
    "assert_evidence": [],
    "preview": {
@@ -7225,6 +8218,132 @@
     "addr": 2775376,
     "words": 24
    }
+  },
+  {
+   "function": "FUN_L01_002f3120",
+   "addr": 3092768,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "water_current",
+    "method": "moby-class-record",
+    "class_id": 613,
+    "class_ids": [
+     613
+    ],
+    "class_names": [
+     "water_current"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_001e93e8",
+   "addr": 3093864,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "armor_magnetizer",
+    "method": "moby-class-record",
+    "class_id": 618,
+    "class_ids": [
+     618
+    ],
+    "class_names": [
+     "armor_magnetizer"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f4348",
+   "addr": 3097416,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "cave_door",
+    "method": "moby-class-record",
+    "class_id": 641,
+    "class_ids": [
+     641
+    ],
+    "class_names": [
+     "cave_door"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f4428",
+   "addr": 3097640,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "fighter_jet",
+    "method": "moby-class-record",
+    "class_id": 660,
+    "class_ids": [
+     660
+    ],
+    "class_names": [
+     "fighter_jet"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f4710",
+   "addr": 3098384,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "door_half",
+    "method": "moby-class-record",
+    "class_id": 665,
+    "class_ids": [
+     665
+    ],
+    "class_names": [
+     "door_half"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f4960",
+   "addr": 3098976,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "stationary_ship",
+    "method": "moby-class-record",
+    "class_id": 666,
+    "class_ids": [
+     666
+    ],
+    "class_names": [
+     "stationary_ship"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_002f6180",
@@ -7257,12 +8376,155 @@
    }
   },
   {
-   "function": "FUN_002f9bf0",
+   "function": "FUN_L01_002f7728",
+   "addr": 3110696,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bomber_jet",
+    "method": "moby-class-record",
+    "class_id": 688,
+    "class_ids": [
+     688
+    ],
+    "class_names": [
+     "bomber_jet"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f8268",
+   "addr": 3113576,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "water_lily",
+    "method": "moby-class-record",
+    "class_id": 695,
+    "class_ids": [
+     695
+    ],
+    "class_names": [
+     "water_lily"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f8718",
+   "addr": 3114776,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "rock",
+    "method": "moby-class-record",
+    "class_id": 696,
+    "class_ids": [
+     696,
+     697,
+     698
+    ],
+    "class_names": [
+     "rock",
+     "rock",
+     "rock"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f9080",
+   "addr": 3117184,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "falling_rock",
+    "method": "moby-class-record",
+    "class_id": 701,
+    "class_ids": [
+     701
+    ],
+    "class_names": [
+     "falling_rock"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f95c0",
+   "addr": 3118528,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "piston_platform",
+    "method": "moby-class-record",
+    "class_id": 703,
+    "class_ids": [
+     703,
+     715
+    ],
+    "class_names": [
+     "piston_platform",
+     "piston_platform_2"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f9810",
+   "addr": 3119120,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "rock_formation",
+    "method": "moby-class-record",
+    "class_id": 704,
+    "class_ids": [
+     704
+    ],
+    "class_names": [
+     "rock_formation"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002f9bf0",
    "addr": 3120112,
    "sources": [
-    "preview-match"
+    "preview-match",
+    "moby-class"
    ],
-   "name_evidence": null,
+   "name_evidence": {
+    "name": "fan",
+    "method": "moby-class-record",
+    "class_id": 705,
+    "class_ids": [
+     705
+    ],
+    "class_names": [
+     "fan"
+    ]
+   },
    "modules": [],
    "assert_evidence": [],
    "preview": {
@@ -7270,6 +8532,142 @@
     "addr": 2807120,
     "words": 100
    }
+  },
+  {
+   "function": "FUN_L01_002f9d80",
+   "addr": 3120512,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bridge_piece_1",
+    "method": "moby-class-record",
+    "class_id": 709,
+    "class_ids": [
+     709,
+     710,
+     711
+    ],
+    "class_names": [
+     "bridge_piece_1",
+     "bridge_piece_2",
+     "bridge_piece_3"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002e3ca8",
+   "addr": 3122976,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "green_leaves",
+    "method": "moby-class-record",
+    "class_id": 724,
+    "class_ids": [
+     724,
+     725
+    ],
+    "class_names": [
+     "green_leaves",
+     "blue_leaves"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002fa800",
+   "addr": 3123200,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "destroyable_cave_wall",
+    "method": "moby-class-record",
+    "class_id": 729,
+    "class_ids": [
+     729
+    ],
+    "class_names": [
+     "destroyable_cave_wall"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002fad68",
+   "addr": 3124584,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "agnogg_ship_front",
+    "method": "moby-class-record",
+    "class_id": 730,
+    "class_ids": [
+     730,
+     731,
+     790
+    ],
+    "class_names": [
+     "agnogg_ship_front",
+     "agnogg_ship_back",
+     "ship_rear"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002fb8a8",
+   "addr": 3127464,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "bridge_half",
+    "method": "moby-class-record",
+    "class_id": 746,
+    "class_ids": [
+     746
+    ],
+    "class_names": [
+     "bridge_half"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002d5de8",
+   "addr": 3129216,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "infobot",
+    "method": "moby-class-record",
+    "class_id": 750,
+    "class_ids": [
+     750
+    ],
+    "class_names": [
+     "infobot"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_002fd0e8",
@@ -7287,6 +8685,113 @@
    }
   },
   {
+   "function": "FUN_L01_002fd9a0",
+   "addr": 3135904,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "green_mushroom",
+    "method": "moby-class-record",
+    "class_id": 754,
+    "class_ids": [
+     754
+    ],
+    "class_names": [
+     "green_mushroom"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002d6f28",
+   "addr": 3136448,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "particle_spawner_smoke__fire",
+    "method": "moby-class-record",
+    "class_id": 760,
+    "class_ids": [
+     760
+    ],
+    "class_names": [
+     "particle_spawner_smoke__fire"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002fed68",
+   "addr": 3140968,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "door_left",
+    "method": "moby-class-record",
+    "class_id": 768,
+    "class_ids": [
+     768,
+     769
+    ],
+    "class_names": [
+     "door_left",
+     "door_right"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002ff118",
+   "addr": 3141912,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "the_plumber",
+    "method": "moby-class-record",
+    "class_id": 774,
+    "class_ids": [
+     774
+    ],
+    "class_names": [
+     "the_plumber"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_002ff860",
+   "addr": 3143776,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "pipe",
+    "method": "moby-class-record",
+    "class_id": 778,
+    "class_ids": [
+     778
+    ],
+    "class_names": [
+     "pipe"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_002ffcd0",
    "addr": 3144912,
    "sources": [
@@ -7300,6 +8805,27 @@
     "addr": 2823792,
     "words": 60
    }
+  },
+  {
+   "function": "FUN_L01_00300220",
+   "addr": 3146272,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "spawn_point",
+    "method": "moby-class-record",
+    "class_id": 805,
+    "class_ids": [
+     805
+    ],
+    "class_names": [
+     "spawn_point"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_00300518",
@@ -7377,12 +8903,44 @@
    }
   },
   {
-   "function": "FUN_003021b8",
+   "function": "FUN_L00_002d89f0",
+   "addr": 3149280,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "nanotech_ball",
+    "method": "moby-class-record",
+    "class_id": 806,
+    "class_ids": [
+     806
+    ],
+    "class_names": [
+     "nanotech_ball"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_003021b8",
    "addr": 3154360,
    "sources": [
-    "preview-match"
+    "preview-match",
+    "moby-class"
    ],
-   "name_evidence": null,
+   "name_evidence": {
+    "name": "beehive",
+    "method": "moby-class-record",
+    "class_id": 815,
+    "class_ids": [
+     815
+    ],
+    "class_names": [
+     "beehive"
+    ]
+   },
    "modules": [],
    "assert_evidence": [],
    "preview": {
@@ -7452,6 +9010,48 @@
    }
   },
   {
+   "function": "FUN_L00_002da790",
+   "addr": 3158016,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "suckcannon",
+    "method": "moby-class-record",
+    "class_id": 849,
+    "class_ids": [
+     849
+    ],
+    "class_names": [
+     "suckcannon"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_001e9448",
+   "addr": 3162296,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "ratchet",
+    "method": "moby-class-record",
+    "class_id": 0,
+    "class_ids": [
+     0
+    ],
+    "class_names": [
+     "ratchet"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_00304100",
    "addr": 3162368,
    "sources": [
@@ -7512,6 +9112,111 @@
    }
   },
   {
+   "function": "FUN_L01_00307c48",
+   "addr": 3177544,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "mushroom_underside",
+    "method": "moby-class-record",
+    "class_id": 1042,
+    "class_ids": [
+     1042
+    ],
+    "class_names": [
+     "mushroom_underside"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_00307ca0",
+   "addr": 3177632,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "gold_bolt",
+    "method": "moby-class-record",
+    "class_id": 1134,
+    "class_ids": [
+     1134
+    ],
+    "class_names": [
+     "gold_bolt"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_00308bd8",
+   "addr": 3181528,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "teleporter",
+    "method": "moby-class-record",
+    "class_id": 1135,
+    "class_ids": [
+     1135
+    ],
+    "class_names": [
+     "teleporter"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002df730",
+   "addr": 3185040,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "vendor_orb",
+    "method": "moby-class-record",
+    "class_id": 1143,
+    "class_ids": [
+     1143
+    ],
+    "class_names": [
+     "vendor_orb"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002df9a0",
+   "addr": 3185872,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "hydrodisplacer",
+    "method": "moby-class-record",
+    "class_id": 1251,
+    "class_ids": [
+     1251
+    ],
+    "class_names": [
+     "hydrodisplacer"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_0030a610",
    "addr": 3188240,
    "sources": [
@@ -7527,6 +9232,48 @@
    }
   },
   {
+   "function": "FUN_001e93e8",
+   "addr": 3188424,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "o2_mask",
+    "method": "moby-class-record",
+    "class_id": 1289,
+    "class_ids": [
+     1289
+    ],
+    "class_names": [
+     "o2_mask"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_002e03a0",
+   "addr": 3188432,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "pilots_helmet",
+    "method": "moby-class-record",
+    "class_id": 1290,
+    "class_ids": [
+     1290
+    ],
+    "class_names": [
+     "pilots_helmet"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
    "function": "FUN_0030aab8",
    "addr": 3189432,
    "sources": [
@@ -7540,6 +9287,48 @@
     "addr": 2861576,
     "words": 128
    }
+  },
+  {
+   "function": "FUN_L01_0030d0f0",
+   "addr": 3199216,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "tall_shroom",
+    "method": "moby-class-record",
+    "class_id": 1813,
+    "class_ids": [
+     1813
+    ],
+    "class_names": [
+     "tall_shroom"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L01_0030df40",
+   "addr": 3202880,
+   "sources": [
+    "moby-class"
+   ],
+   "name_evidence": {
+    "name": "sandmouse",
+    "method": "moby-class-record",
+    "class_id": 1818,
+    "class_ids": [
+     1818
+    ],
+    "class_names": [
+     "sandmouse"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_0030f498",
