@@ -1,15 +1,16 @@
 {
  "schema": "rnc-overlay-name-evidence-v1",
  "level": "level-08",
- "generated": "2026-10-02T15:24:09+00:00",
+ "generated": "2026-10-02T15:57:37+00:00",
  "method": [
   "preview-build function matches (normalized instruction hashes)",
   "exact boot-symbol matches (normalized instruction hashes)",
-  "moby class names from each level program's lvl.vtbl dispatch records, joined with the Wrench moby_classes unpack (the record's first word is the class id, the directory name carries it)"
+  "moby class names from each level program's lvl.vtbl dispatch records, joined with the Wrench moby_classes unpack (the record's first word is the class id, the directory name carries it)",
+  "memory-card state names from each level program's handler table: the dispatcher indexes the handler table with the state, and the table of state names follows it (same length, last slot null)"
  ],
  "stats": {
-  "functions_with_evidence": 615,
-  "named": 314,
+  "functions_with_evidence": 640,
+  "named": 339,
   "with_assert_evidence": 0,
   "assert_records": 0,
   "modules": {}
@@ -3646,6 +3647,456 @@
     "addr": 2273272,
     "words": 154
    }
+  },
+  {
+   "function": "FUN_002088a8",
+   "addr": 2443384,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_init",
+    "method": "memory-card-state-record",
+    "state": "CS_INIT",
+    "states": [
+     "CS_INIT"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_002088d0",
+   "addr": 2443424,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_good_save",
+    "method": "memory-card-state-record",
+    "state": "CS_GOOD_SAVE",
+    "states": [
+     "CS_GOOD_SAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208980",
+   "addr": 2443600,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_warning",
+    "method": "memory-card-state-record",
+    "state": "CS_WARNING",
+    "states": [
+     "CS_WARNING"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_002089a8",
+   "addr": 2443640,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_no_card",
+    "method": "memory-card-state-record",
+    "state": "CS_NOCARD",
+    "states": [
+     "CS_NOCARD"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024adb0",
+   "addr": 2443680,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_wait_for_card",
+    "method": "memory-card-state-record",
+    "state": "CS_WAIT_FOR_CARD",
+    "states": [
+     "CS_WAIT_FOR_CARD"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024ae18",
+   "addr": 2443784,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_unformatted",
+    "method": "memory-card-state-record",
+    "state": "CS_UNFORMATTED",
+    "states": [
+     "CS_UNFORMATTED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024ae58",
+   "addr": 2443848,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_prompt_format",
+    "method": "memory-card-state-record",
+    "state": "CS_PROMPT_FORMAT",
+    "states": [
+     "CS_PROMPT_FORMAT"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208af8",
+   "addr": 2443976,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_format_pending",
+    "method": "memory-card-state-record",
+    "state": "CS_FORMAT_PENDING",
+    "states": [
+     "CS_FORMAT_PENDING"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208b28",
+   "addr": 2444024,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_formatting",
+    "method": "memory-card-state-record",
+    "state": "CS_FORMATTING",
+    "states": [
+     "CS_FORMATTING"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208b88",
+   "addr": 2444120,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_formatted",
+    "method": "memory-card-state-record",
+    "state": "CS_FORMATTED",
+    "states": [
+     "CS_FORMATTED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208bc0",
+   "addr": 2444176,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_check_save",
+    "method": "memory-card-state-record",
+    "state": "CS_CHECK_SAVE",
+    "states": [
+     "CS_CHECK_SAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024afe0",
+   "addr": 2444240,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_checking_save",
+    "method": "memory-card-state-record",
+    "state": "CS_CHECKING_SAVE",
+    "states": [
+     "CS_CHECKING_SAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024b050",
+   "addr": 2444352,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_no_save",
+    "method": "memory-card-state-record",
+    "state": "CS_NOSAVE",
+    "states": [
+     "CS_NOSAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208ca8",
+   "addr": 2444408,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_prompt_create_save",
+    "method": "memory-card-state-record",
+    "state": "CS_PROMPT_CREATE_SAVE",
+    "states": [
+     "CS_PROMPT_CREATE_SAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208bc0",
+   "addr": 2444528,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_create_save_pending",
+    "method": "memory-card-state-record",
+    "state": "CS_CREATE_SAVE_PENDING",
+    "states": [
+     "CS_CREATE_SAVE_PENDING"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208d60",
+   "addr": 2444592,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_creating_save",
+    "method": "memory-card-state-record",
+    "state": "CS_CREATING_SAVE",
+    "states": [
+     "CS_CREATING_SAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024b1b8",
+   "addr": 2444712,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_new_card",
+    "method": "memory-card-state-record",
+    "state": "CS_NEWCARD",
+    "states": [
+     "CS_NEWCARD"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208e68",
+   "addr": 2444856,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_format_failed",
+    "method": "memory-card-state-record",
+    "state": "CS_FORMAT_FAILED",
+    "states": [
+     "CS_FORMAT_FAILED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208e68",
+   "addr": 2444896,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_create_failed",
+    "method": "memory-card-state-record",
+    "state": "CS_CREATE_FAILED",
+    "states": [
+     "CS_CREATE_FAILED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208eb8",
+   "addr": 2444936,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_no_room",
+    "method": "memory-card-state-record",
+    "state": "CS_NO_ROOM",
+    "states": [
+     "CS_NO_ROOM"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208e68",
+   "addr": 2444968,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_load_failed",
+    "method": "memory-card-state-record",
+    "state": "CS_LOAD_FAILED",
+    "states": [
+     "CS_LOAD_FAILED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208e68",
+   "addr": 2445008,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_save_failed",
+    "method": "memory-card-state-record",
+    "state": "CS_SAVE_FAILED",
+    "states": [
+     "CS_SAVE_FAILED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208f28",
+   "addr": 2445048,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_saving",
+    "method": "memory-card-state-record",
+    "state": "CS_SAVING",
+    "states": [
+     "CS_SAVING"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_L00_0024b380",
+   "addr": 2445168,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_prompt_begin_unformatted",
+    "method": "memory-card-state-record",
+    "state": "CS_PROMPT_BEGIN_UNFORMATTED",
+    "states": [
+     "CS_PROMPT_BEGIN_UNFORMATTED"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
+  },
+  {
+   "function": "FUN_00208fe8",
+   "addr": 2445240,
+   "sources": [
+    "memory-card-state"
+   ],
+   "name_evidence": {
+    "name": "save_card_state_prompt_begin_no_save",
+    "method": "memory-card-state-record",
+    "state": "CS_PROMPT_BEGIN_NOSAVE",
+    "states": [
+     "CS_PROMPT_BEGIN_NOSAVE"
+    ]
+   },
+   "modules": [],
+   "assert_evidence": [],
+   "preview": null
   },
   {
    "function": "FUN_00255000",
