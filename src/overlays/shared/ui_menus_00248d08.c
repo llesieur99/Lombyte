@@ -71,9 +71,54 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00249a18.s", FUN_L00_00249a18);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00249af8.s", FUN_L00_00249af8);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_00249d80.s", FUN_L00_00249d80);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024adb0.s", FUN_L00_0024adb0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024ae18.s", FUN_L00_0024ae18);
+extern s32 D_0013D2AC[];
+extern s32 D_0015EEB4_c __asm__("D_0015EEB4");
+void FUN_L00_0024ae18(void) {
+    if (D_0013D2AC[0] != -2) {
+        D_0015EEB0 = 3;
+    } else {
+        if (D_0015EEB4_c & 2) {
+            D_0015EEB0 = 6;
+        }
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024ae58.s", FUN_L00_0024ae58);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024afe0.s", FUN_L00_0024afe0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024b050.s", FUN_L00_0024b050);
+void FUN_L00_0024afe0(void)
+{
+    if (D_0013D290[7] < -1) {
+        D_0015EEB0 = 3;
+    } else if (D_0013D290[5] == -2) {
+        if (D_0013D290[3] < 0x15E) { D_0015EEB0 = 0x13; } else { D_0015EEB0 = 0xC; }
+    } else if (D_0013D290[5] >= -1) {
+        D_0015EEB0 = 0x10;
+    }
+}
+extern s32 D_0015EEB4_c2 __asm__("D_0015EEB4");
+void FUN_L00_0024b050(void) {
+    if (D_0013D2AC[0] != 0) {
+        D_0015EEB0 = 3;
+    } else if (D_0015EEB4_c2 & 2) {
+        D_0015EEB0 = 0xD;
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024b1b8.s", FUN_L00_0024b1b8);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L00_0024b380.s", FUN_L00_0024b380);
+/* D_0013D2AC is the +0x1C field of the shared D_0013D290 block. */
+typedef struct { u8 pad[0x1C]; s32 f; } M2c_D_0013D290_0024b380;
+extern M2c_D_0013D290_0024b380 D_0013D290_0024b380 __asm__("D_0013D290");
+extern s32 D_0015EEB4_0024b380 __asm__("D_0015EEB4");
+extern s32 D_0015EEB0_0024b380 __asm__("D_0015EEB0");
+
+void FUN_L00_0024b380_0024b380(void) __asm__("FUN_L00_0024b380");
+
+void FUN_L00_0024b380_0024b380(void) {
+    s32 flags;
+    if (D_0013D290_0024b380.f != -2) {
+        D_0015EEB0_0024b380 = 3;
+        return;
+    }
+    flags = D_0015EEB4_0024b380;
+    if (flags & 0x20) {
+        D_0015EEB4_0024b380 = flags ^ 0x20;
+        D_0015EEB0_0024b380 = 5;
+    }
+}

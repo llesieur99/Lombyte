@@ -6,7 +6,47 @@ INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002f6328.s", FUN_L01_002f6328);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002f6a30.s", FUN_L01_002f6a30);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002f8530.s", FUN_L01_002f8530);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002f8718.s", FUN_L01_002f8718);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002fb4b8.s", FUN_L01_002fb4b8);
+typedef struct {
+    u8 pad0[0xA6];
+    s16 type;
+} Moby;
+
+typedef struct {
+    u8 pad0[0x44];
+    s16 count;
+    u8 pad46[0x178 - 0x46];
+    Moby *list[1];
+} MobyList;
+
+typedef struct {
+    u8 b0;
+    u8 active;
+    u8 pad2[0x1E];
+    f32 x;
+    f32 y;
+    f32 z;
+} Effect;
+
+extern s32 D_L01_0015F5C4;
+extern u8 D_0015EDB0;
+extern MobyList D_L01_0016CCE0;
+extern Effect D_L01_0017C8C0;
+extern void FUN_0020cb10(void *, int, void *);
+
+void FUN_L01_002fb4b8(void) {
+    s32 i;
+
+    if (D_L01_0015F5C4 == 2 && D_0015EDB0 != 0) {
+        for (i = 0; i < D_L01_0016CCE0.count; i++) {
+            int t = D_L01_0016CCE0.list[i]->type;
+
+            if ((t == 0x398 || t == 0x1BF) && D_L01_0017C8C0.active == 0) {
+                FUN_0020cb10(D_L01_0016CCE0.list[i], 0, &D_L01_0017C8C0);
+                D_L01_0017C8C0.z = D_L01_0017C8C0.y = D_L01_0017C8C0.x = 2.1f;
+            }
+        }
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_002fb5b0.s", FUN_L01_002fb5b0);
 #define NOT_SDA
 
@@ -65,7 +105,22 @@ void FUN_L01_00308380(char *moby) {
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_00308550.s", FUN_L01_00308550);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_003087e0.s", FUN_L01_003087e0);
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_003089f0.s", FUN_L01_003089f0);
-INCLUDE_ASM("config/us/overlays/asm/FUN_L01_00308b28.s", FUN_L01_00308b28);
+/* Ported from rac1-decomp (PAL, src/overlays/shared/vendor_002F7700.c: func_L01_00309F00), where it is exact; names translated to the US level program. */
+
+extern int D_0015ED84; /* no foreign declaration */
+extern int D_L01_001BA950[];
+extern unsigned char D_0014C190[];
+extern void FUN_L01_0026e0e0(char *arg, int val);
+
+void FUN_L01_00308b28(char *moby) {
+    int d = D_0015ED84 << 8;
+    unsigned char t;
+    *(int *)(D_0014C190 + (((short)*(unsigned short *)(moby + 0xB2) >> 5) * 4 + d)) |= 1 << (*(unsigned short *)(moby + 0xB2) & 0x1F);
+    D_L01_001BA950[(short)*(unsigned short *)(moby + 0xB2) >> 5] |= 1 << (*(unsigned short *)(moby + 0xB2) & 0x1F);
+    t = *(unsigned char *)(moby + 0x21);
+    if (t != 0xFF) FUN_L01_0026e0e0((char *)t, 1);
+    else moby[0x20] = 1;
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_00308bd8.s", FUN_L01_00308bd8);
 #include "qcopy.h"
 
@@ -102,7 +157,43 @@ void FUN_L01_003092d0(char *m) {
         p++;
     }
 }
-INCLUDE_ASM("config/us/overlays/asm/FUN_L01_00309430.s", FUN_L01_00309430);
+/* Picks a per-stage table by the current stage number and passes the entry for the moby's index on. */
+/* Ported from rac1-decomp (PAL, src/overlays/shared/vendor_002F7700.c: func_L01_0030A808), where it is exact; names translated to the US level program. */
+
+extern int D_0015ED84; /* no foreign declaration */
+extern int D_L01_00201600[];
+extern int D_L01_00201618[];
+extern short D_L01_00161F98_d __asm__("D_L01_00161F98") __attribute__((sda));
+extern short D_L01_00161FA0_d __asm__("D_L01_00161FA0") __attribute__((sda));
+extern short D_L01_00161FA8_d __asm__("D_L01_00161FA8") __attribute__((sda));
+extern short D_L01_00161FB0_d __asm__("D_L01_00161FB0") __attribute__((sda));
+s32 try_set_help_message(s32 arg0, s32 arg1) __asm__("FUN_00215130");
+
+void FUN_L01_00309430(char *moby) {
+    int *data = *(int **)(moby + 0x78);
+    switch (D_0015ED84) {
+    case 12:
+        try_set_help_message(4, ((int *)&D_L01_00161FA0_d)[data[4]]);
+        break;
+    case 17:
+        try_set_help_message(4, D_L01_00201618[data[4]]);
+        break;
+    case 1:
+    case 7:
+    case 13:
+        try_set_help_message(4, D_L01_00201600[data[4]]);
+        break;
+    case 8:
+        try_set_help_message(4, ((int *)&D_L01_00161F98_d)[data[4]]);
+        break;
+    case 16:
+        try_set_help_message(4, ((int *)&D_L01_00161FA8_d)[data[4]]);
+        break;
+    case 18:
+        try_set_help_message(4, ((int *)&D_L01_00161FB0_d)[data[4]]);
+        break;
+    }
+}
 INCLUDE_ASM("config/us/overlays/asm/FUN_L01_003094f0.s", FUN_L01_003094f0);
 /* Mark the parent and its three attached objects active. */
 /* Ported from rac1-decomp (PAL, src/overlays/shared/vendor_002F7700.c: func_L01_0030ABC0), where it is exact; names translated to the US level program. */
