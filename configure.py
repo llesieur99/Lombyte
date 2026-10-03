@@ -279,6 +279,10 @@ GAME_COMPILER_FLAG_UNITS = {
     "audio/rpc/snd_reset_state_and_flush_commands": "-mastra-r5900-extern-buffer",
     "ui/menus/fun_00225490": "-fno-schedule-insns",
     "audio/sound/fun_0022c7e8": "-fno-schedule-insns",
+    # FUN_002075e8: retail materializes the zero return before `jr $ra` and
+    # leaves the delay slot empty; the default pass moves that assignment into
+    # the slot.  100/100/100 with this option (2026-10-03).
+    "ui/menus/fun_002075e8": "-fno-delayed-branch",
     # fun_001f33b8 (-fno-schedule-insns) and fun_00221f58 (-G0) carry no entry:
     # both owners are still assembly wrappers, where an option cannot change the
     # wrapper's bytes. The shorter keys also always won first-suffix-match over
