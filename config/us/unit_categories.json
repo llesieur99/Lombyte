@@ -144,6 +144,8 @@
     "assembly/textbin/fast_mem_or16",
     "assembly/textbin/fun_001f9958",
     "assembly/textbin/fun_001f9988",
+    "assembly/textbin/fun_001f99c8",
+    "assembly/textbin/fun_001f99d0",
     "assembly/textbin/fun_001f9a00",
     "assembly/textbin/fast_vec_add",
     "assembly/textbin/fast_vec_sub",
