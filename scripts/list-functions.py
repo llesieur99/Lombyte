@@ -136,6 +136,15 @@ def apply_payload(unit: dict, payload: dict | None, problem: str | None) -> None
     unit["non_text_ok"] = payload.get("non_text_ok")
 
 
+def format_score(percent: float | None) -> str:
+    """Keep near-exact scores visibly below 100%."""
+    if percent is None:
+        return "-"
+    if 99.9 <= percent < 100.0:
+        return f"{percent:.3f}%"
+    return f"{percent:.1f}%"
+
+
 def score_units(units: list[dict], workspace: Path) -> int:
     """Fill in ``score`` for every unit; return the error count."""
     scorable = [unit for unit in units if unit["c_body"]]
@@ -158,7 +167,7 @@ def score_units(units: list[dict], workspace: Path) -> int:
         elif percent is None:
             shown = "?"
         else:
-            shown = f"{percent:.1f}%"
+            shown = format_score(percent)
         print(
             f"[{index:>3}/{len(scorable)}] {shown:>7}  {unit['owner']}",
             file=sys.stderr,
@@ -344,7 +353,7 @@ def main(argv=None) -> int:
         if score_mode:
             score = unit.get("score")
             shown = "error" if unit.get("score_error") else (
-                f"{score:.1f}%" if score is not None else "-"
+                format_score(score)
             )
             print(f"  {shown:>6}  {unit['size']:>6}  {unit['owner']:<{width}}  {name}{flag}")
         else:
