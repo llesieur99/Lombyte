@@ -1004,6 +1004,47 @@ class ListFunctionsTests(unittest.TestCase):
         self.assertIn("42.0%", output)
         self.assertLess(output.index("almost"), output.index("with_c"))
 
+    def test_score_does_not_round_near_exact_units_to_100(self):
+        with tempfile.TemporaryDirectory() as name:
+            tmp = Path(name)
+            self._repo(tmp)
+            workspace = self._workspace(tmp)
+            scores = {
+                "assembly/textbin/with_c": 100.0,
+                "assembly/textbin/almost": 99.96416,
+            }
+
+            def fake_run(command, **kwargs):
+                return SimpleNamespace(
+                    returncode=0,
+                    stdout=json.dumps(
+                        {"text_match_percent": scores[command[2]]}
+                    ),
+                    stderr="",
+                )
+
+            stdout = io.StringIO()
+            with (
+                mock.patch.object(self.lister, "ROOT", tmp),
+                mock.patch.object(self.lister.subprocess, "run", fake_run),
+                contextlib.redirect_stdout(stdout),
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                code = self.lister.main(
+                    ["--score", "--limit", "0", "--workspace", str(workspace)]
+                )
+        self.assertEqual(code, 0)
+        output = stdout.getvalue()
+        almost_line = next(
+            line for line in output.splitlines() if "assembly/textbin/almost" in line
+        )
+        exact_line = next(
+            line for line in output.splitlines() if "assembly/textbin/with_c" in line
+        )
+        self.assertIn("99.964%", almost_line)
+        self.assertNotIn("100.0%", almost_line)
+        self.assertIn("100.0%", exact_line)
+
     def test_score_requires_a_baseline_workspace(self):
         with tempfile.TemporaryDirectory() as name:
             tmp = Path(name)
